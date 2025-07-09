@@ -1,0 +1,62 @@
+export const Sidebar = (props) => {
+  const sidenav = ["About", "Essays", "Kanjectures", "Talks", "Notes", "Quotes"];
+  const links = ["/", "/writing", "/kanjectures", "/talks", "/notes", "/quotes"];
+  return <div class="px-4 pt-6 font-medium mx-auto justify-end">
+    <img class="w-32 rounded-full mx-auto mb-8" src="https://res.cloudinary.com/djp21wtxm/image/upload/v1668024592/i400x400-8CCvGqDSGMe6_lvbzly.png" />
+    <a
+      href="/"
+      className="inline-block w-auto font-bold text-lg p-3 pl-4 pr-4 mb-4 bg-[#7e22ce] rounded-md"><span className="text-white whitespace-nowrap">Kanjun Qiu</span></a>
+    {sidenav.map((chapter, index) => {
+      const active = index + 1 === props.chapter;
+      const link = links[index];
+      return <div className={`block whitespace-nowrap px-2 py-1 my-1 hover:bg-zinc-100 overflow-hidden rounded-md no-underline ${active ? "bg-zinc-100 font-semibold" : "font-medium"}`}><a href={link}> {chapter}</a></div>
+    })}
+    <div class="px-2 text-sm font-light mb-8 mt-8">
+      <div className="block mb-1"><a href="https://www.twitter.com/kanjun">Twitter</a></div>
+      <div className="block mb-1"><a
+      href="https://bsky.app/profile/kanjun.bsky.social">Bluesky</a></div>
+      <div className="block mb-1"><a  href="https://imbue.com/podcast/">Podcast</a></div>
+      <div className="block mb-1"><a href="https://www.linkedin.com/in/kanjun/">Linkedin</a></div>
+    </div>
+  </div>
+}
+
+export const PageContainer = (props) => {
+  return <div class="w-full m-auto">
+    {props.children}
+  </div>
+}
+
+{/* Example use */}
+
+<div className="p-8">
+    <p className="font-bold text-3xl">Sidebar</p>
+
+    <Sidebar chapter={2} />
+
+
+    <p className="mt-12 mb-8 font-bold text-3xl">Page container</p>
+
+    <PageContainer>
+        Hello container
+    </PageContainer>
+</div>
+
+export const Spacer = () => {
+  return <div style={{ height: 20 }} />
+}
+
+export const SubTitle = ({ date, authorName, authorUrl }) => {
+  return <p className="text-zinc-500">
+      {authorName
+        ? <>{date}, with <a className="text-zinc-500 font-normal" href={authorUrl}> {authorName}</a></>
+        : <>{date}</>
+      }
+    </p>
+}
+
+<SubTitle
+  date="October 18, 2022"
+  authorName="Michael Nielsen"
+  authorUrl="" />
+

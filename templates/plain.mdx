@@ -1,0 +1,17 @@
+export const meta = {
+  name: "Plain"
+}
+
+export const Template = ({ filename, meta, children }) => {
+  return <div className="antialiased">
+    {children}
+  </div>
+}
+
+export default (props) => <Template {...props} />
+
+{/* Sample data */}
+
+# Plain template
+
+Some sample text.

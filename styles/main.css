@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+a {
+  @apply no-underline text-purple-700 !important;
+}
+a:hover {
+  @apply text-purple-900 transition ease-in duration-150 !important;
+  border-bottom-color: rgba(88, 28, 135, 0.25) !important;
+  border-bottom-width: 1px !important;
+}
+
+h1 {
+  font-weight: 600 !important;
+  margin-bottom: 8px !important;
+}
+
+h2 {
+  font-weight: 600 !important;
+  margin-top: 36px !important;
+  margin-bottom: 8px !important;
+}
+h2 a {
+  font-weight: 600 !important;
+}
+
+.book-cover {
+  height: 200px;
+}
+
+.book-cover:hover {
+  opacity: 0.8;
+}
+
+p {
+}
