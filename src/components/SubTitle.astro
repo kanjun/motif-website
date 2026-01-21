@@ -1,0 +1,19 @@
+---
+interface Props {
+  date: string;
+  authorName?: string;
+  authorUrl?: string;
+}
+
+const { date, authorName, authorUrl } = Astro.props;
+---
+
+<p class="text-zinc-500 !mt-0">
+  {authorName ? (
+    <>
+      {date}, with <a class="text-zinc-500 font-normal" href={authorUrl}>{authorName}</a>
+    </>
+  ) : (
+    date
+  )}
+</p>

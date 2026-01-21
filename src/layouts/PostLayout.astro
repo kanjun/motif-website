@@ -1,0 +1,29 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  frontmatter: {
+    title: string;
+    date?: string;
+    description?: string;
+    ogImage?: string;
+  };
+}
+
+const { frontmatter } = Astro.props;
+---
+
+<BaseLayout
+  title={`${frontmatter.title} ∙ Kanjun Qiu`}
+  description={frontmatter.description}
+  ogImage={frontmatter.ogImage}
+  sidebarRow={2}
+>
+  <article>
+    <h1>{frontmatter.title}</h1>
+    {frontmatter.date && (
+      <p class="text-zinc-500 !mt-0">{frontmatter.date}</p>
+    )}
+    <slot />
+  </article>
+</BaseLayout>

@@ -1,0 +1,137 @@
+/**
+ * Tufte-style sidenotes CSS
+ *
+ * On desktop: Notes appear in the right margin
+ * On mobile: Notes collapse and expand on tap
+ */
+
+/* Counter for sidenote numbers */
+body {
+  counter-reset: sidenote-counter;
+}
+
+/* The superscript number in the text */
+.sidenote-number {
+  counter-increment: sidenote-counter;
+}
+
+.sidenote-number::after {
+  content: counter(sidenote-counter);
+  font-size: 0.75rem;
+  top: -0.5rem;
+  position: relative;
+  vertical-align: baseline;
+  color: #7e22ce;
+  font-weight: 500;
+}
+
+/* Hide the checkbox (used for mobile toggle) */
+.margin-toggle {
+  display: none;
+}
+
+/* The sidenote content */
+.sidenote {
+  float: right;
+  clear: right;
+  margin-right: -45%;
+  width: 40%;
+  margin-top: 0.25rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  vertical-align: baseline;
+  position: relative;
+  color: #52525b; /* zinc-600 */
+}
+
+/* Add the number before sidenote content */
+.sidenote::before {
+  content: counter(sidenote-counter) ". ";
+  font-weight: 500;
+  color: #7e22ce;
+}
+
+/* Margin notes (unnumbered) */
+.marginnote {
+  float: right;
+  clear: right;
+  margin-right: -45%;
+  width: 40%;
+  margin-top: 0.25rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  vertical-align: baseline;
+  position: relative;
+  color: #52525b;
+}
+
+/* Mobile styles: collapse sidenotes */
+@media (max-width: 1024px) {
+  .sidenote,
+  .marginnote {
+    display: none;
+  }
+
+  /* Show a toggle indicator on mobile */
+  .margin-toggle:checked + .sidenote,
+  .margin-toggle:checked + .marginnote {
+    display: block;
+    float: left;
+    clear: both;
+    width: 95%;
+    margin: 1rem 2.5%;
+    padding: 0.75rem 1rem;
+    background-color: #fafafa;
+    border-left: 3px solid #7e22ce;
+    border-radius: 0 0.25rem 0.25rem 0;
+  }
+
+  /* Make the number clickable on mobile */
+  label.sidenote-number {
+    cursor: pointer;
+  }
+
+  label.sidenote-number::after {
+    color: #7e22ce;
+    text-decoration: underline;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 640px) {
+  .margin-toggle:checked + .sidenote,
+  .margin-toggle:checked + .marginnote {
+    width: 100%;
+    margin: 1rem 0;
+  }
+}
+
+/* Ensure sidenotes don't overlap with each other */
+.sidenote + .sidenote {
+  margin-top: 0.5rem;
+}
+
+/* Style for traditional footnotes section (if any remain) */
+.footnotes {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e4e4e7;
+  font-size: 0.875rem;
+  color: #71717a;
+}
+
+.footnotes ol {
+  padding-left: 1.5rem;
+}
+
+.footnotes li {
+  margin-bottom: 0.75rem;
+}
+
+/* Back-reference link in footnotes */
+.footnotes a[href^="#fnref"] {
+  font-size: 0.75rem;
+  margin-left: 0.25rem;
+}

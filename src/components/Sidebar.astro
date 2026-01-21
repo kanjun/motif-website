@@ -1,0 +1,60 @@
+---
+interface Props {
+  activeRow?: number;
+}
+
+const { activeRow = 1 } = Astro.props;
+
+const navItems = [
+  { name: "About", href: "/", row: 1 },
+  { name: "Essays", href: "/writing", row: 2 },
+  { name: "Kanjectures", href: "/kanjectures", row: 3 },
+  { name: "Talks", href: "/talks", row: 4 },
+  { name: "Notes", href: "/notes", row: 5 },
+  { name: "Quotes", href: "/quotes", row: 6 },
+];
+
+const socialLinks = [
+  { name: "Twitter", href: "https://www.twitter.com/kanjun" },
+  { name: "Bluesky", href: "https://bsky.app/profile/kanjun.bsky.social" },
+  { name: "Podcast", href: "https://imbue.com/podcast/" },
+  { name: "LinkedIn", href: "https://www.linkedin.com/in/kanjun/" },
+];
+---
+
+<aside class="sidebar px-4 pt-6 font-medium mx-auto justify-end">
+  <img
+    class="w-32 rounded-full mx-auto mb-8"
+    src="https://res.cloudinary.com/djp21wtxm/image/upload/v1668024592/i400x400-8CCvGqDSGMe6_lvbzly.png"
+    alt="Kanjun Qiu"
+  />
+
+  <a
+    href="/"
+    class="inline-block w-auto font-bold text-lg p-3 pl-4 pr-4 mb-4 bg-[#7e22ce] rounded-md"
+  >
+    <span class="text-white whitespace-nowrap">Kanjun Qiu</span>
+  </a>
+
+  <nav>
+    {navItems.map((item) => (
+      <a
+        href={item.href}
+        class:list={[
+          "block whitespace-nowrap px-2 py-1 my-1 hover:bg-zinc-100 overflow-hidden rounded-md no-underline",
+          activeRow === item.row ? "bg-zinc-100 font-semibold" : "font-medium"
+        ]}
+      >
+        {item.name}
+      </a>
+    ))}
+  </nav>
+
+  <div class="px-2 text-sm font-light mb-8 mt-8">
+    {socialLinks.map((link) => (
+      <div class="block mb-1">
+        <a href={link.href}>{link.name}</a>
+      </div>
+    ))}
+  </div>
+</aside>

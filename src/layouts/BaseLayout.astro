@@ -1,0 +1,71 @@
+---
+import Sidebar from '../components/Sidebar.astro';
+import '../styles/main.css';
+import '../styles/tufte-sidenotes.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+  sidebarRow?: number;
+}
+
+const {
+  title,
+  description = "Kanjun Qiu - Writing, Kanjectures, Notes, Bookshelf.",
+  ogImage = "https://res.cloudinary.com/djp21wtxm/image/upload/v1616903020/ibh1lyke2oysnnpyun6y.png",
+  sidebarRow = 1
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary" />
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href={ogImage} />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet" />
+
+    <!-- Littlefoot for mobile footnote hover -->
+    <link rel="stylesheet" href="https://unpkg.com/littlefoot/dist/littlefoot.css" />
+  </head>
+  <body class="bg-white text-black antialiased">
+    <div class="w-full m-auto">
+      <div class="sm:grid sm:grid-cols-5 gap-4">
+        <Sidebar activeRow={sidebarRow} />
+        <main class="col-span-3 max-w-screen-md px-4 sm:px-8 pb-32 justify-start p-8 mx-auto prose prose-zinc w-full">
+          <slot />
+        </main>
+      </div>
+    </div>
+
+    <!-- Littlefoot initialization for mobile footnote popups -->
+    <script>
+      import littlefoot from 'littlefoot';
+
+      // Only activate littlefoot on mobile (sidenotes become footnotes)
+      if (window.innerWidth < 768) {
+        littlefoot({
+          activateOnHover: true,
+          hoverDelay: 100,
+        });
+      }
+    </script>
+  </body>
+</html>

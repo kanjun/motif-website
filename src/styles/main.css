@@ -1,0 +1,130 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =============================================================================
+   Base Typography & Links
+   ============================================================================= */
+
+a {
+  @apply no-underline text-purple-700;
+}
+
+a:hover {
+  @apply text-purple-900 transition ease-in duration-150;
+  border-bottom-color: rgba(88, 28, 135, 0.25);
+  border-bottom-width: 1px;
+}
+
+/* =============================================================================
+   Headings
+   ============================================================================= */
+
+h1 {
+  @apply font-semibold;
+  margin-bottom: 8px;
+}
+
+h2 {
+  @apply font-semibold;
+  margin-top: 36px;
+  margin-bottom: 8px;
+}
+
+h2 a {
+  @apply font-semibold;
+}
+
+h3 {
+  @apply font-semibold;
+  margin-top: 24px;
+  margin-bottom: 8px;
+}
+
+/* =============================================================================
+   Prose Customizations (Tailwind Typography)
+   ============================================================================= */
+
+.prose {
+  --tw-prose-links: #7e22ce;
+  --tw-prose-headings: #18181b;
+  --tw-prose-body: #27272a;
+  max-width: 65ch;
+}
+
+/* Better blockquote styling */
+.prose blockquote {
+  @apply border-l-purple-300 text-zinc-600 italic;
+  border-left-width: 3px;
+}
+
+.prose blockquote p {
+  @apply my-2;
+}
+
+/* =============================================================================
+   Book Cover (Bookshelf page)
+   ============================================================================= */
+
+.book-cover {
+  height: 200px;
+}
+
+.book-cover:hover {
+  opacity: 0.8;
+}
+
+/* =============================================================================
+   Embedded Media (YouTube, Spotify, etc.)
+   ============================================================================= */
+
+.prose iframe {
+  @apply rounded-lg my-6;
+  max-width: 100%;
+}
+
+/* =============================================================================
+   Images
+   ============================================================================= */
+
+.prose img {
+  @apply rounded-lg my-6;
+}
+
+/* =============================================================================
+   Sidebar Styles
+   ============================================================================= */
+
+.sidebar {
+  @apply sticky top-0 h-screen hidden sm:block;
+  padding-top: 2rem;
+}
+
+.sidebar nav a {
+  @apply text-zinc-700;
+}
+
+.sidebar nav a:hover {
+  border-bottom: none;
+}
+
+/* =============================================================================
+   Mobile Responsiveness
+   ============================================================================= */
+
+@media (max-width: 640px) {
+  .sidebar {
+    @apply static h-auto block;
+    padding-bottom: 1rem;
+  }
+
+  .prose {
+    @apply px-4;
+  }
+
+  .prose iframe {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16/9;
+  }
+}
