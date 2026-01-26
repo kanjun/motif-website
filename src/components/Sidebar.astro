@@ -41,7 +41,7 @@ const socialLinks = [
       <a
         href={item.href}
         class:list={[
-          "block whitespace-nowrap px-2 py-1 my-1 hover:bg-zinc-100 overflow-hidden rounded-md no-underline",
+          "block whitespace-nowrap px-2 py-1 my-1 hover:bg-zinc-100 overflow-hidden rounded-md no-underline text-purple-700 hover:text-purple-900",
           activeRow === item.row ? "bg-zinc-100 font-semibold" : "font-medium"
         ]}
       >
@@ -53,7 +53,7 @@ const socialLinks = [
   <div class="px-2 text-sm font-light mb-8 mt-8">
     {socialLinks.map((link) => (
       <div class="block mb-1">
-        <a href={link.href}>{link.name}</a>
+        <a href={link.href} class="text-purple-700 hover:text-purple-900">{link.name}</a>
       </div>
     ))}
   </div>

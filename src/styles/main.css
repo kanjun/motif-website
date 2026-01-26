@@ -25,14 +25,16 @@ h1 {
   margin-bottom: 8px;
 }
 
-h2 {
-  @apply font-semibold;
+h2,
+.prose h2 {
+  font-weight: 700 !important;
   margin-top: 36px;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
-h2 a {
-  @apply font-semibold;
+h2 a,
+.prose h2 a {
+  font-weight: 700 !important;
 }
 
 h3 {
@@ -54,12 +56,29 @@ h3 {
 
 /* Better blockquote styling */
 .prose blockquote {
-  @apply border-l-purple-300 text-zinc-600 italic;
+  @apply border-l-purple-300 text-zinc-600;
   border-left-width: 3px;
+  font-style: italic;
 }
 
 .prose blockquote p {
   @apply my-2;
+}
+
+/* =============================================================================
+   Essay List Styling
+   ============================================================================= */
+
+.essay-list .essay-entry {
+  margin-bottom: 2rem;
+}
+
+.essay-list h2 {
+  margin-bottom: 0.5rem;
+}
+
+.essay-list p {
+  color: #52525b; /* zinc-600 */
 }
 
 /* =============================================================================
@@ -101,10 +120,11 @@ h3 {
 }
 
 .sidebar nav a {
-  @apply text-zinc-700;
+  @apply text-purple-700;
 }
 
 .sidebar nav a:hover {
+  @apply text-purple-900;
   border-bottom: none;
 }
 

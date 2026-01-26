@@ -8,10 +8,10 @@ interface Props {
 const { date, authorName, authorUrl } = Astro.props;
 ---
 
-<p class="text-zinc-500 !mt-0">
+<p class="text-zinc-500 text-base !mt-0 !mb-2" style="font-style: italic;">
   {authorName ? (
     <>
-      {date}, with <a class="text-zinc-500 font-normal" href={authorUrl}>{authorName}</a>
+      {date}, with <a class="text-zinc-500 font-normal hover:text-zinc-700" href={authorUrl}>{authorName}</a>
     </>
   ) : (
     date
