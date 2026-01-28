@@ -43,12 +43,13 @@ export function remarkSidenotes() {
     visit(tree, 'footnoteReference', (node, index, parent) => {
       sidenoteCounter++;
       const id = `sn-${sidenoteCounter}`;
+      const num = sidenoteCounter;
       const content = footnoteDefinitions.get(node.identifier) || '';
 
-      // Create sidenote HTML structure (Tufte-style)
+      // Create sidenote HTML structure with explicit numbers (not CSS counters)
       const sidenoteHtml = {
         type: 'html',
-        value: `<label for="${id}" class="margin-toggle sidenote-number"></label><input type="checkbox" id="${id}" class="margin-toggle"/><span class="sidenote">${content}</span>`,
+        value: `<label for="${id}" class="margin-toggle"><sup class="sidenote-number">${num}</sup></label><input type="checkbox" id="${id}" class="margin-toggle"/><span class="sidenote"><span class="sidenote-num">${num}.</span> ${content}</span>`,
       };
 
       // Replace the footnote reference with our sidenote

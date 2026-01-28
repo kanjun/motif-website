@@ -5,29 +5,23 @@
  * On mobile: Notes collapse and expand on tap
  */
 
-/* Counter for sidenote numbers */
-body {
-  counter-reset: sidenote-counter;
-}
-
 /* The superscript number in the text */
 .sidenote-number {
-  counter-increment: sidenote-counter;
-}
-
-.sidenote-number::after {
-  content: counter(sidenote-counter);
   font-size: 0.75rem;
-  top: -0.5rem;
-  position: relative;
-  vertical-align: baseline;
   color: #7e22ce;
   font-weight: 500;
+  cursor: pointer;
 }
 
 /* Hide the checkbox (used for mobile toggle) */
-.margin-toggle {
+input.margin-toggle {
   display: none;
+}
+
+/* Make the label visible for clicking */
+label.margin-toggle {
+  display: inline !important;
+  cursor: pointer;
 }
 
 /* The sidenote content */
@@ -45,9 +39,8 @@ body {
   color: #52525b; /* zinc-600 */
 }
 
-/* Add the number before sidenote content */
-.sidenote::before {
-  content: counter(sidenote-counter) ". ";
+/* Style the number in the sidenote */
+.sidenote-num {
   font-weight: 500;
   color: #7e22ce;
 }
@@ -89,12 +82,7 @@ body {
   }
 
   /* Make the number clickable on mobile */
-  label.sidenote-number {
-    cursor: pointer;
-  }
-
-  label.sidenote-number::after {
-    color: #7e22ce;
+  .sidenote-number {
     text-decoration: underline;
   }
 }
