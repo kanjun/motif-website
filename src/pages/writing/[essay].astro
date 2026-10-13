@@ -1,0 +1,25 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import PostLayout from '../../layouts/PostLayout.astro';
+import { formatDate } from '../../lib/dates';
+
+// Only essays written here get a page; ones with a `url` live elsewhere.
+export async function getStaticPaths() {
+  const essays = await getCollection('essays', (e) => !e.data.url);
+  return essays.map((essay) => ({ params: { essay: essay.id }, props: { essay } }));
+}
+
+const { essay } = Astro.props as { essay: CollectionEntry<'essays'> };
+const { Content } = await render(essay);
+---
+
+<PostLayout
+  frontmatter={{
+    title: essay.data.title,
+    date: formatDate(essay.data.date),
+    description: essay.data.description,
+    ogImage: essay.data.ogImage,
+  }}
+>
+  <Content />
+</PostLayout>

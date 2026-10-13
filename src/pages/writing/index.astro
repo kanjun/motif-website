@@ -1,6 +1,11 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SubTitle from '../../components/SubTitle.astro';
+import { formatDate } from '../../lib/dates';
+
+// Newest first. Essays with a `url` link out; the rest live at /writing/<name>.
+const essays = (await getCollection('essays')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 ---
 
 <BaseLayout
@@ -11,38 +16,14 @@ import SubTitle from '../../components/SubTitle.astro';
   <h1>Essays</h1>
 
   <div class="essay-list">
-    <article class="essay-entry">
-      <h2>
-        <a href="https://scienceplusplus.org/metascience/index.html">
-          A Vision of Metascience: An Engine of Improvement for the Social Processes of Science
-        </a>
-      </h2>
-      <SubTitle date="October 18, 2022" authorName="Michael Nielsen" authorUrl="https://michaelnielsen.org/" />
-      <p>
-        How does the culture of science change and improve? Many people have identified shortcomings in core social processes of science, such as peer review, how grants are awarded, how people are selected to become scientists, and so on. Yet despite often compelling criticisms, strong barriers inhibit widespread change in such social processes. The result is near stasis, and apathy about the prospects for improvement. People sometimes start new research institutions intended to do things differently; unfortunately...
-      </p>
-    </article>
-
-    <article class="essay-entry">
-      <h2>
-        <a href="https://scienceplusplus.org/trouble_with_rcts/index.html">
-          The trouble in comparing different approaches to science funding
-        </a>
-      </h2>
-      <SubTitle date="February 9, 2022" authorName="Michael Nielsen" authorUrl="https://michaelnielsen.org/" />
-      <p>
-        There's a striking vision, now gaining momentum, where we "turn the scientific method on ourselves", in part to help improve our scientific institutions. This vision is exciting, since the quality of humanity's scientific institutions so strongly influences our collective future. It's also challenging: one major obstacle is understanding how to do experiments which figure out what works, and what does not...
-      </p>
-    </article>
-
-    <article class="essay-entry">
-      <h2>
-        <a href="/writing/research-as-understanding">Research as Understanding</a>
-      </h2>
-      <SubTitle date="October 17, 2021" />
-      <p>
-        I misunderstood the nature of research for most of my life, and this prevented me from doing any. I thought significant research came from following the scientific method until novel discoveries popped out. I'd never contributed something new to human knowledge before, so being a researcher—which required replicating this outcome—felt impossibly far out of reach. But it turns out the novel discovery is just a side effect...
-      </p>
-    </article>
+    {essays.map((essay) => (
+      <article class="essay-entry">
+        <h2>
+          <a href={essay.data.url ?? `/writing/${essay.id}`}>{essay.data.title}</a>
+        </h2>
+        <SubTitle date={formatDate(essay.data.date)} authorName={essay.data.coauthor} authorUrl={essay.data.coauthorUrl} />
+        {essay.data.excerpt && <p>{essay.data.excerpt}</p>}
+      </article>
+    ))}
   </div>
 </BaseLayout>

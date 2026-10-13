@@ -1,0 +1,14 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import MarkdownPage from '../components/MarkdownPage.astro';
+
+// Every page in src/content/pages except about.md (the home page) gets /<name>.
+export async function getStaticPaths() {
+  const pages = await getCollection('pages', (p) => p.id !== 'about');
+  return pages.map((page) => ({ params: { page: page.id }, props: { page } }));
+}
+
+const { page } = Astro.props as { page: CollectionEntry<'pages'> };
+---
+
+<MarkdownPage page={page} />
