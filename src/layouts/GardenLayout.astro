@@ -1,0 +1,42 @@
+---
+import '../styles/main.css';
+import '../styles/garden.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'Kanjun Qiu’s working notes.' } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <link rel="shortcut icon" href="/images/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
+  </head>
+  <body class="garden-page antialiased">
+    <header class="garden-header">
+      <a href="/" class="garden-home"><img src="/images/kanjun.png" alt="" />Kanjun Qiu</a>
+      <span class="garden-sep">/</span>
+      <a href="/garden" class="garden-name">Garden</a>
+    </header>
+    <div class="stack" id="stack">
+      <slot />
+    </div>
+    <div class="popover prose prose-zinc" id="popover" hidden></div>
+    <script>
+      import { startGarden } from '../lib/garden-client';
+      startGarden();
+    </script>
+  </body>
+</html>

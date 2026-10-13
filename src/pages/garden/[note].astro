@@ -1,0 +1,23 @@
+---
+import { getCollection } from 'astro:content';
+import GardenLayout from '../../layouts/GardenLayout.astro';
+import NotePane from '../../components/NotePane.astro';
+import { allNotes, backlinksByNote, type Backlink, type Note } from '../../lib/garden';
+
+export async function getStaticPaths() {
+  const notes = await allNotes();
+  const backlinks = await backlinksByNote();
+  const histories = new Set((await getCollection('gardenHistory')).map((h) => h.id));
+  return notes.map((note) => ({
+    params: { note: note.id },
+    props: { note, backlinks: backlinks.get(note.id) ?? [], hasHistory: histories.has(note.id) },
+  }));
+}
+
+const { note, backlinks, hasHistory } = Astro.props as { note: Note; backlinks: Backlink[]; hasHistory: boolean };
+const summary = (note.body ?? '').split(/\n\s*\n/)[0].replace(/\[([^\]]+)\]\([^)]*\)/g, '$1').slice(0, 200);
+---
+
+<GardenLayout title={`${note.data.title} ∙ Kanjun Qiu`} description={summary}>
+  <NotePane note={note} backlinks={backlinks} hasHistory={hasHistory} />
+</GardenLayout>

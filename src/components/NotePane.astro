@@ -1,0 +1,39 @@
+---
+import { render } from 'astro:content';
+import type { Backlink, Note } from '../lib/garden';
+import { formatDay } from '../lib/garden';
+
+interface Props {
+  note: Note;
+  backlinks: Backlink[];
+  hasHistory: boolean;
+}
+
+const { note, backlinks, hasHistory } = Astro.props;
+const { Content } = await render(note);
+---
+
+<article class="pane" data-slug={note.id} data-title={note.data.title}>
+  <a class="spine" href={`/garden/${note.id}`} tabindex="-1"><span>{note.data.title}</span></a>
+  <div class="pane-body">
+    <div class="note prose prose-zinc">
+      <h1>{note.data.title}</h1>
+      <Content />
+    </div>
+    {backlinks.length > 0 && (
+      <section class="backlinks">
+        <h2>Links to this note</h2>
+        {backlinks.map(({ note: from, context }) => (
+          <a class="backlink" href={`/garden/${from.id}`}>
+            <strong>{from.data.title}</strong>
+            <span>{context}</span>
+          </a>
+        ))}
+      </section>
+    )}
+    <footer class="note-meta">
+      Last changed {formatDay(note.data.updated)}
+      {hasHistory && <> · <a href={`/garden/${note.id}/history`} data-no-stack>History</a></>}
+    </footer>
+  </div>
+</article>

@@ -1,0 +1,30 @@
+---
+import GardenLayout from '../../layouts/GardenLayout.astro';
+import { allNotes, formatDay } from '../../lib/garden';
+
+const notes = await allNotes();
+---
+
+<GardenLayout title="Garden ∙ Kanjun Qiu">
+  <article class="pane" data-slug="" data-title="About these notes">
+    <a class="spine" href="/garden" tabindex="-1"><span>About these notes</span></a>
+    <div class="pane-body">
+      <div class="note prose prose-zinc">
+        <h1>About these notes</h1>
+        <p>
+          These are my working notes: ideas I'm developing, written mostly for myself and published as they grow.
+          Each note tries to hold one idea and links to the ideas it connects to. Click a link to open that note
+          beside this one.
+        </p>
+        <p>Notes change over time, and each one keeps its history.</p>
+        <h2>Recently tended</h2>
+        {notes.length === 0 && <p>The first notes are still growing. Check back soon.</p>}
+        <ul class="note-list">
+          {notes.map((note) => (
+            <li><a href={`/garden/${note.id}`}>{note.data.title}</a> <span>{formatDay(note.data.updated)}</span></li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </article>
+</GardenLayout>
