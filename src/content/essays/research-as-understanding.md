@@ -3,7 +3,7 @@ title: Research as Understanding
 date: 2021-10-17
 description: I misunderstood the nature of research for most of my life, and this prevented me from doing any. An attempt at a more empowering model of what research actually entails.
 excerpt: "I misunderstood the nature of research for most of my life, and this prevented me from doing any. I thought significant research came from following the scientific method until novel discoveries popped out. I'd never contributed something new to human knowledge before, so being a researcher—which required replicating this outcome—felt impossibly far out of reach. But it turns out the novel discovery is just a side effect..."
-ogImage: https://res.cloudinary.com/djp21wtxm/image/upload/v1634492946/wvrunwke1i1axnrq9sah.png
+ogImage: /images/research-as-understanding-preview.png
 ---
 
 I misunderstood the nature of research for most of my life, and this prevented me from doing any. I thought significant research came from following the scientific method until novel discoveries popped out. I'd never contributed something new to human knowledge before, so being a researcher—which required replicating this outcome—felt impossibly far out of reach.
@@ -12,7 +12,7 @@ But it turns out the novel discovery is just a side effect. You don't make novel
 
 Instead, research is simply a continuation of something we already naturally do: learning. Learning happens when you understand something that _someone else already understands_. Research happens when you understand something that _nobody else understands yet_.
 
-![Diagram showing learning vs research](https://res.cloudinary.com/djp21wtxm/image/upload/v1634487951/dv24ydqlrkscrxo44r0k.png)
+![Diagram showing learning vs research](../../assets/images/learning-vs-research.png)
 
 This hit me during COVID quarantine when I escaped to the mountains of Santa Fe to learn probability theory from a dear mathematician friend. He began by asking me to teach him something simple, like combinatorics. I said that seemed pointless, as certainly he already knew combinatorics, but he assured me he'd forgotten much and that it'd help. I nervously brushed up, preparing. As I began whiteboarding, he started asking questions, and pretty soon I felt like he was actually learning from me—_exhilarating_.
 

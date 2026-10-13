@@ -13,9 +13,12 @@ interface Props {
 const {
   title,
   description = "Kanjun Qiu - Writing, Kanjectures, Notes, Bookshelf.",
-  ogImage = "https://res.cloudinary.com/djp21wtxm/image/upload/v1616903020/ibh1lyke2oysnnpyun6y.png",
+  ogImage = "/images/favicon.png",
   sidebarRow = 1
 } = Astro.props;
+
+// Link previews need a full address, so expand site-relative image paths.
+const ogImageUrl = new URL(ogImage, Astro.site).href;
 ---
 
 <!DOCTYPE html>
@@ -29,11 +32,11 @@ const {
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={ogImage} />
+    <meta property="og:image" content={ogImageUrl} />
     <meta name="twitter:card" content="summary" />
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href={ogImage} />
+    <link rel="shortcut icon" href="/images/favicon.png" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />

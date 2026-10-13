@@ -7,7 +7,7 @@ sidebarRow: 6
 
 ## Reading
 
-<a href="https://www.goodreads.com/en/book/show/17836098-powers-of-two"><img src="https://res.cloudinary.com/djp21wtxm/image/upload/v1647487480/i315x475-EKLFJpaljHW1_tgeidp.png" class="book-cover" alt="Powers of Two" /></a>
+<a href="https://www.goodreads.com/en/book/show/17836098-powers-of-two"><img src="/images/powers-of-two.jpg" class="book-cover" alt="Powers of Two" /></a>
 
 Existential Kink
 
