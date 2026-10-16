@@ -42,9 +42,9 @@ a:hover { color: var(--text-heading); }
 p { margin: 0 0 1em; }
 
 /* Three type sizes: titles, body, and small labels (dates, names, the menu). */
-.title { font-size: 2rem; line-height: 1.15; font-weight: 500; margin: 0 0 var(--space-6); text-wrap: balance; color: var(--text-heading); }
+.title { font-size: 2rem; line-height: 1.15; font-weight: 500; margin: 0 0 var(--space-6); text-wrap: pretty; color: var(--text-heading); }
 .label { font-family: var(--font-label); font-size: .75rem; line-height: 1.4; text-transform: uppercase; letter-spacing: .12em; color: var(--text-secondary); }
-.section-title { font-size: 1.5rem; line-height: 1.25; font-weight: 500; margin: var(--space-12) 0 var(--space-4); color: var(--text-heading); text-wrap: balance; scroll-margin-top: var(--space-8); }
+.section-title { font-size: 1.5rem; line-height: 1.25; font-weight: 500; margin: var(--space-12) 0 var(--space-4); color: var(--text-heading); text-wrap: pretty; scroll-margin-top: var(--space-8); }
 
 /* ---- the top bar ------------------------------------------------------- */
 .top { display: flex; align-items: center; gap: var(--space-12); padding: var(--space-6) var(--space-8) var(--space-2); }
@@ -127,7 +127,7 @@ p { margin: 0 0 1em; }
 .essays .essay > a { display: block; text-decoration: none; color: var(--text-body); }
 .essay-aside { margin: var(--space-3) 0 0; font-size: .9rem; color: var(--text-secondary); }
 .essay-aside a { color: inherit; text-decoration: underline; text-underline-offset: .15em; }
-.essays b { font-size: 1.5rem; line-height: 1.25; margin: var(--space-1) 0 var(--space-3); text-wrap: balance; }
+.essays b { font-size: 1.5rem; line-height: 1.25; margin: var(--space-1) 0 var(--space-3); text-wrap: pretty; }
 .essays .sub { color: var(--text-body); }
 .essays .essay > a:hover b { text-decoration: underline; text-decoration-color: var(--color-secondary); text-decoration-thickness: 2px; text-underline-offset: .2em; }
 
@@ -171,7 +171,7 @@ p { margin: 0 0 1em; }
 .talk .play { background: var(--color-background); color: var(--text-heading); padding: .5rem .9rem; border-radius: 999px; }
 .talk .embed:hover .play { background: var(--web-white); }
 .talk > .label { display: block; margin-bottom: var(--space-1); }
-.talk-title { display: block; font-size: 1.5rem; line-height: 1.25; font-weight: 500; color: var(--text-heading); text-decoration: none; margin: var(--space-1) 0 var(--space-3); text-wrap: balance; }
+.talk-title { display: block; font-size: 1.5rem; line-height: 1.25; font-weight: 500; color: var(--text-heading); text-decoration: none; margin: var(--space-1) 0 var(--space-3); text-wrap: pretty; }
 a.talk-title:hover { text-decoration: underline; text-decoration-color: var(--color-secondary); text-decoration-thickness: 2px; text-underline-offset: .2em; }
 
 /* On wide pages (Library, Talks) text runs the full width of the cards beside it. */

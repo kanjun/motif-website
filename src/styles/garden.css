@@ -63,5 +63,5 @@
 
 /* Kanjectures starts at the same left edge as the centred pages; notes open to the
    right of it, and once they fill the window the stack scrolls as before. */
-.stack { padding-left: calc(var(--site-gutter) + var(--space-6)); }
+.stack { padding-left: calc(var(--site-gutter) + var(--space-6)); transition: padding-left var(--duration-base, .25s) ease-out; }
 @media (max-width: 800px) { .stack { padding-left: 0; } }

@@ -27,7 +27,19 @@ function panes(stack: HTMLElement): HTMLElement[] {
   return [...stack.querySelectorAll<HTMLElement>(':scope > .pane')];
 }
 
+// On a wide screen the stack starts at the same left edge as the other pages. As more
+// notes open, it gives up that margin so they stay in view, and only once even the
+// whole window is full do earlier notes fold into spines.
+function fitMargin(stack: HTMLElement) {
+  if (!isWide()) { stack.style.paddingLeft = ''; return; }
+  const edge = 24;
+  const aligned = Math.max(0, (window.innerWidth - 1280) / 2) + edge;
+  const total = panes(stack).reduce((sum, p) => sum + p.offsetWidth, 0);
+  stack.style.paddingLeft = `${Math.max(edge, Math.min(aligned, window.innerWidth - total - edge))}px`;
+}
+
 function layout(stack: HTMLElement) {
+  fitMargin(stack);
   panes(stack).forEach((pane, i) => pane.style.setProperty('--i', String(i)));
   updateCollapsed(stack);
   markOpenLinks(stack);
@@ -141,7 +153,7 @@ export function startGarden() {
   setupPopover(stack);
   if (!panes(stack)[0]?.classList.contains('pane-solo')) {
     stack.addEventListener('scroll', () => updateCollapsed(stack), { passive: true });
-    window.addEventListener('resize', () => updateCollapsed(stack));
+    window.addEventListener('resize', () => { fitMargin(stack); updateCollapsed(stack); });
     stack.addEventListener('click', (e) => {
       const a = (e.target as HTMLElement).closest<HTMLAnchorElement>('a[href]');
       if (!a || a.hasAttribute('data-no-stack') || e.metaKey || e.ctrlKey || e.shiftKey || !isWide()) return;
