@@ -13,26 +13,28 @@ const { note, backlinks, hasHistory } = Astro.props;
 const { Content } = await render(note);
 ---
 
-<article class="pane" data-slug={note.id} data-title={note.data.title}>
+<article class="pane paper" data-slug={note.id} data-title={note.data.title}>
   <a class="spine" href={`/garden/${note.id}`} tabindex="-1"><span>{note.data.title}</span></a>
   <div class="pane-body">
-    <div class="note prose prose-zinc">
-      <h1>{note.data.title}</h1>
+    <div class="note content">
+      <h1 class="title">{note.data.title}</h1>
       <Content />
     </div>
     {backlinks.length > 0 && (
       <section class="backlinks">
-        <h2>Links to this note</h2>
-        {backlinks.map(({ note: from, context }) => (
-          <a class="backlink" href={`/garden/${from.id}`}>
-            <strong>{from.data.title}</strong>
-            <span>{context}</span>
-          </a>
-        ))}
+        <h2 class="section-title">Links to this note</h2>
+        <div class="rows">
+          {backlinks.map(({ note: from, context }) => (
+            <a class="backlink" href={`/garden/${from.id}`}>
+              <b>{from.data.title}</b>
+              <span class="sub">{context}</span>
+            </a>
+          ))}
+        </div>
       </section>
     )}
-    <footer class="note-meta">
-      Last changed {formatDay(note.data.updated)}
+    <footer class="note-meta label">
+      Tended {formatDay(note.data.updated)}
       {hasHistory && <> · <a href={`/garden/${note.id}/history`} data-no-stack>History</a></>}
     </footer>
   </div>

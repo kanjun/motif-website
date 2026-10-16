@@ -49,3 +49,9 @@ export async function backlinksByNote(): Promise<Map<string, Backlink[]>> {
 export function formatDay(date: Date): string {
   return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
 }
+
+/** "Oct 12" for lists; the year only when it isn't this year. */
+export function shortDay(date: Date): string {
+  const sameYear = date.getUTCFullYear() === new Date().getUTCFullYear();
+  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', ...(sameYear ? {} : { year: 'numeric' }), timeZone: 'UTC' });
+}

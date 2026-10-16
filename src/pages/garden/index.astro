@@ -1,30 +1,40 @@
 ---
+import { getEntry, render } from 'astro:content';
 import GardenLayout from '../../layouts/GardenLayout.astro';
-import { allNotes, formatDay } from '../../lib/garden';
+import { allNotes, shortDay } from '../../lib/garden';
 
 const notes = await allNotes();
+// The notes that were the Kanjectures on the old site, in her order.
+const startHere = notes.filter((n) => n.data.kanjecture !== undefined).sort((a, b) => a.data.kanjecture! - b.data.kanjecture!);
+const recent = notes.slice(0, 12);
+const intro = await getEntry('pages', 'kanjectures');
+const Intro = intro ? (await render(intro)).Content : null;
 ---
 
-<GardenLayout title="Garden ∙ Kanjun Qiu">
-  <article class="pane" data-slug="" data-title="About these notes">
-    <a class="spine" href="/garden" tabindex="-1"><span>About these notes</span></a>
+<GardenLayout title="Kanjectures ∙ Kanjun Qiu">
+  <article class="pane home" data-slug="" data-title="Kanjectures">
+    <a class="spine" href="/garden" tabindex="-1"><span>Kanjectures</span></a>
     <div class="pane-body">
-      <div class="note prose prose-zinc">
-        <h1>About these notes</h1>
-        <p>
-          These are my working notes: ideas I'm developing, written mostly for myself and published as they grow.
-          Each note tries to hold one idea and links to the ideas it connects to. Click a link to open that note
-          beside this one.
-        </p>
-        <p>Notes change over time, and each one keeps its history.</p>
-        <h2>Recently tended</h2>
-        {notes.length === 0 && <p>The first notes are still growing. Check back soon.</p>}
-        <ul class="note-list">
-          {notes.map((note) => (
-            <li><a href={`/garden/${note.id}`}>{note.data.title}</a> <span>{formatDay(note.data.updated)}</span></li>
-          ))}
-        </ul>
-      </div>
+      <h1 class="title">Kanjectures</h1>
+      <div class="content intro">{Intro && <Intro />}</div>
+      <p class="hint">Notes link to each other. Click a link and it opens beside the note you’re reading.</p>
+      {notes.length === 0 && <p>The first notes are still growing. Check back soon.</p>}
+      {startHere.length > 0 && (
+        <>
+          <h2 class="section-title">Start here</h2>
+          <div class="rows">
+            {startHere.map((n) => <a href={`/garden/${n.id}`}><b>{n.data.title}</b></a>)}
+          </div>
+        </>
+      )}
+      {recent.length > 0 && (
+        <>
+          <h2 class="section-title">Recently tended</h2>
+          <div class="rows dated">
+            {recent.map((n) => <a href={`/garden/${n.id}`}><b>{n.data.title}</b><span class="label">{shortDay(n.data.updated)}</span></a>)}
+          </div>
+        </>
+      )}
     </div>
   </article>
 </GardenLayout>

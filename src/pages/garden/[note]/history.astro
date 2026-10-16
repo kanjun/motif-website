@@ -19,9 +19,9 @@ const when = (d: Date) =>
 <GardenLayout title={`History of ${note!.data.title} ∙ Kanjun Qiu`}>
   <article class="pane pane-solo" data-slug={`${slug}/history`} data-title={`History of ${note!.data.title}`}>
     <div class="pane-body">
-      <div class="note prose prose-zinc">
+      <div class="note content">
         <p class="history-back"><a href={`/garden/${slug}`} data-no-stack>← {note!.data.title}</a></p>
-        <h1>History</h1>
+        <h1 class="title">History</h1>
         <p class="history-intro">Every published version of this note, newest first. Words added in each version are <ins>highlighted</ins>; removed words are <del>struck through</del>.</p>
         {versions.map((v, i) => (
           <details class="version" open={i === 0}>

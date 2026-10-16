@@ -1,61 +1,62 @@
-/* Garden: notes open side by side and fold into spines (Andy Matuschak's accordion). */
-.garden-page { --pane-w: 620px; --spine-w: 40px; height: 100vh; display: flex; flex-direction: column; background: #fafaf9; color: #18181b; font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
-.garden-header { flex: none; display: flex; align-items: center; gap: 10px; padding: 10px 18px; border-bottom: 1px solid #e4e4e7; background: #fff; font-size: 14px; }
-.garden-header a { color: #7e22ce; text-decoration: none; font-weight: 600; }
-.garden-home { display: flex; align-items: center; gap: 8px; }
-.garden-home img { width: 26px; height: 26px; border-radius: 50%; }
-.garden-sep { color: #a1a1aa; }
+/* Kanjectures: notes open side by side and fold into spines (Andy Matuschak's
+   accordion). The front page sits on the page itself; each note is a sheet
+   of off-white paper laid over it. */
+.garden-page { height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+.garden-page .top { flex: none; }
 
-.stack { flex: 1; display: flex; overflow-x: auto; overflow-y: hidden; min-height: 0; }
-.pane { flex: 0 0 var(--pane-w); width: var(--pane-w); position: sticky; left: calc(var(--i, 0) * var(--spine-w)); height: 100%;
-  background: #fff; border-left: 1px solid #e4e4e7; box-shadow: -6px 0 18px rgba(0,0,0,.035); display: flex; transition: box-shadow .2s; }
-.pane:first-child { border-left: 0; }
-.pane-body { flex: 1; overflow-y: auto; padding: 28px 36px 80px 10px; min-width: 0; }
-.spine { flex: 0 0 var(--spine-w); display: block; text-decoration: none; color: #3f3f46; opacity: 0; transition: opacity .15s; pointer-events: none; }
-.spine span { display: block; writing-mode: vertical-lr; padding: 22px 0 0 11px; font-size: 14px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-height: 100%; }
+.stack { --pane-w: 36rem; --spine-w: 2.75rem; flex: 1; display: flex; overflow-x: auto; overflow-y: hidden; min-height: 0; padding: var(--space-2) 0 0 var(--space-6); }
+.pane { flex: 0 0 var(--pane-w); width: var(--pane-w); position: sticky; left: calc(var(--i, 0) * var(--spine-w)); height: 100%; display: flex; background: var(--color-background); }
+.pane.home { flex-basis: 40rem; width: 40rem; }
+.pane.paper { background: var(--web-white); border-radius: 6px 6px 0 0; box-shadow: -12px 0 26px -20px rgba(45, 0, 96, .45); }
+.pane-body { flex: 1; overflow-y: auto; min-width: 0; padding: var(--space-12) var(--space-12) var(--space-16) var(--space-2); }
+.pane.home .pane-body { padding-left: var(--space-8); }
+.spine { flex: 0 0 var(--spine-w); display: block; text-decoration: none; color: var(--text-heading); opacity: 0; transition: opacity .15s; pointer-events: none; }
+.spine span { display: block; writing-mode: vertical-lr; padding: var(--space-6) 0 0 .85rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-height: 100%; }
 .pane.collapsed .spine { opacity: 1; pointer-events: auto; cursor: pointer; }
 .pane.collapsed .pane-body { opacity: 0; pointer-events: none; }
-.pane.collapsed { box-shadow: -2px 0 6px rgba(0,0,0,.04); }
 .pane.flash { animation: flash .6s; }
-@keyframes flash { 0% { background: #faf5ff; } 100% { background: #fff; } }
-.pane-solo { flex-basis: min(820px, 100%); width: auto; position: static; }
-.pane-solo .pane-body { padding-left: 48px; }
+@keyframes flash { from { box-shadow: inset 0 0 0 2px var(--color-secondary); } }
+.pane-solo { flex-basis: min(46rem, 100%); width: auto; position: static; }
+.pane-solo .pane-body { padding-left: var(--space-12); }
 
-.note h1 { font-size: 1.6rem; line-height: 1.25; margin-bottom: .8em; }
-.note a[href^="/garden/"] { color: #7e22ce; background: #faf5ff; border-radius: 3px; padding: 0 2px; text-decoration: none; }
-.note a.open-in-stack { background: #ede9fe; }
-.backlinks { margin-top: 44px; padding-top: 18px; border-top: 1px solid #e4e4e7; }
-.backlinks h2 { font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: #71717a; margin: 0 0 10px; }
-.backlink { display: block; padding: 10px 12px; margin: 0 -12px 4px; border-radius: 8px; text-decoration: none; color: inherit; font-size: 14px; line-height: 1.5; }
-.backlink:hover { background: #f4f4f5; }
-.backlink strong { display: block; color: #18181b; margin-bottom: 2px; }
-.backlink span { color: #71717a; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-.note-meta { margin-top: 28px; font-size: 12px; color: #a1a1aa; }
-.note-meta a { color: #71717a; }
-.note-list { list-style: none; padding-left: 0; }
-.note-list li { display: flex; justify-content: space-between; gap: 16px; padding-left: 0; }
-.note-list span { color: #a1a1aa; font-size: 13px; white-space: nowrap; }
+/* Paper is brighter than the page, so the same text reads heavier on it: a touch thinner evens it out. */
+.paper .note p, .paper .note li, .paper .rows .sub, .paper .callout { font-weight: 360; }
 
-.popover { position: fixed; z-index: 50; width: 420px; max-height: 320px; overflow: hidden; background: #fff; border: 1px solid #e4e4e7; border-radius: 10px;
-  box-shadow: 0 18px 40px rgba(0,0,0,.14); padding: 16px 20px; font-size: 14px; line-height: 1.55; pointer-events: none; }
-.popover h1 { font-size: 1.05rem; margin: 0 0 .5em; }
-.popover::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 60px; background: linear-gradient(transparent, #fff); }
+.note.content { max-width: none; }
+.note a[href^="/garden/"] { text-decoration-style: dotted; text-decoration-thickness: 1.5px; text-underline-offset: .2em; }
+.note a.open-in-stack { background: color-mix(in oklab, var(--color-secondary) 55%, transparent); border-radius: 2px; }
+.intro p { margin-bottom: var(--space-3); }
+.intro .aside-note, .content .aside-note { color: var(--text-secondary); font-size: .9rem; }
+.hint { color: var(--text-secondary); }
 
-.version { border-top: 1px solid #e4e4e7; padding: 12px 0; }
-.version summary { cursor: pointer; font-weight: 600; font-size: 14px; }
-.version ins { background: #dcfce7; text-decoration: none; }
-.version del { background: #fee2e2; color: #991b1b; }
-.history-intro ins { background: #dcfce7; text-decoration: none; }
-.history-intro del { background: #fee2e2; }
-.history-back a { color: #7e22ce; text-decoration: none; font-size: 14px; }
+/* Claude's words: a thin rose line down the side, in softer text. */
+.callout { border-left: 3px solid var(--color-secondary); padding: var(--space-1) 0 var(--space-1) var(--space-4); margin: var(--space-8) 0; color: var(--text-secondary); }
+.callout p { margin: 0 0 .4em; }
+.callout a { color: var(--text-secondary) !important; }
+.callout-title { font-family: var(--font-label); font-size: .75rem; text-transform: uppercase; letter-spacing: .12em; margin-bottom: var(--space-1) !important; }
 
-/* Phones: one note at a time, ordinary pages. */
+.backlinks .section-title { margin-top: var(--space-12); }
+.note-meta { display: block; margin-top: var(--space-8); }
+.note-meta a { color: inherit; }
+
+.popover { position: fixed; z-index: 50; width: 26rem; max-height: 20rem; overflow: hidden; background: var(--web-white); border: 1px solid var(--border-hairline);
+  border-radius: var(--radius-md); padding: var(--space-4) var(--space-6); font-size: .9rem; line-height: 1.55; pointer-events: none; }
+.popover .title { font-size: 1.125rem; margin-bottom: var(--space-2); }
+.popover::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 4rem; background: linear-gradient(transparent, var(--web-white)); }
+
+.version { border-top: 1px solid var(--border-hairline); padding: var(--space-3) 0; }
+.version summary { cursor: pointer; font-weight: 500; }
+.version ins, .history-intro ins { background: color-mix(in oklab, #8eafcb 45%, transparent); text-decoration: none; }
+.version del, .history-intro del { background: color-mix(in oklab, var(--color-secondary) 70%, transparent); }
+.history-back a { color: var(--text-secondary); }
+
+/* Phones: one note at a time, as ordinary pages. */
 @media (max-width: 800px) {
-  .garden-page { height: auto; display: block; }
+  .garden-page { height: auto; display: block; overflow: visible; }
   .stack { display: block; overflow: visible; }
-  .pane { position: static; width: auto; height: auto; border-left: 0; box-shadow: none; }
-  .pane + .pane { border-top: 1px solid #e4e4e7; }
-  .pane-body { padding: 24px 20px 48px; overflow: visible; }
+  .pane, .pane.home { position: static; width: auto; height: auto; }
+  .pane.paper { border-radius: 0; box-shadow: none; }
+  .pane-body, .pane.home .pane-body { padding: var(--space-8) var(--space-6) var(--space-12); overflow: visible; }
   .spine { display: none; }
   .popover { display: none !important; }
 }
