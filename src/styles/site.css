@@ -165,3 +165,10 @@ p { margin: 0 0 1em; }
 .talk .label { display: block; margin-bottom: var(--space-1); }
 .talk-title { display: block; font-weight: 500; color: var(--text-heading); text-decoration: none; line-height: 1.4; }
 a.talk-title:hover { text-decoration: underline; text-decoration-color: var(--color-secondary); text-decoration-thickness: 2px; text-underline-offset: .2em; }
+
+/* Alternative bar: sections beside the name, social links at the far right. */
+.top.nav-left .who-wrap { display: contents; }
+.top.nav-left .who { order: 0; margin-right: var(--space-8); }
+.top.nav-left .sections { order: 1; margin-right: auto; }
+.top.nav-left .socials { order: 2; }
+.top.nav-left { justify-content: flex-start; }

@@ -6,8 +6,9 @@ import MarkdownPage from '../components/MarkdownPage.astro';
 // page) and the pages other pages are built from: quotes, notes and bookshelf
 // make up the Library, kanjectures.md is the Kanjectures front page, and
 // talks.md has its own layout (talks.astro).
-const BUILT_ELSEWHERE = new Set(['about', 'quotes', 'notes', 'bookshelf', 'kanjectures', 'talks']);
 export async function getStaticPaths() {
+  // (Declared inside: Astro runs getStaticPaths on its own, without the rest of this file.)
+  const BUILT_ELSEWHERE = new Set(['about', 'quotes', 'notes', 'bookshelf', 'kanjectures', 'talks']);
   const pages = await getCollection('pages', (p) => !BUILT_ELSEWHERE.has(p.id));
   return pages.map((page) => ({ params: { page: page.id }, props: { page } }));
 }

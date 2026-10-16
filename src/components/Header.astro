@@ -6,6 +6,8 @@ interface Props {
 }
 
 const { section } = Astro.props;
+// Preview only: ?nav=left puts the sections by the name and the social links on the right.
+const preview = import.meta.env.DEV;
 
 // Icons are from Simple Icons (CC0); the podcast microphone is drawn here.
 const socials = [
@@ -50,3 +52,9 @@ const library = [
     </span>
   </nav>
 </header>
+
+{preview && (
+  <script is:inline>
+    if (new URLSearchParams(location.search).get('nav') === 'left') document.querySelector('.top').classList.add('nav-left');
+  </script>
+)}
