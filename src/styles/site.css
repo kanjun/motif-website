@@ -63,9 +63,11 @@ p { margin: 0 0 1em; }
 .soc:hover::after, .soc:focus-visible::after { opacity: 1; }
 
 .sections { display: flex; gap: var(--space-8); align-items: center; }
-.sections a { text-decoration: none; padding: .3rem 0; line-height: 1; }
+.sections a { text-decoration: none; line-height: 1; position: relative; }
 .sections a:hover { color: var(--text-heading); }
-.sections a[aria-current] { color: var(--text-heading); box-shadow: inset 0 -2px 0 var(--color-secondary); }
+/* The underline hangs below the word, so the word itself stays level with the name. */
+.sections a[aria-current] { color: var(--text-heading); }
+.sections a[aria-current]::after { content: ""; position: absolute; left: 0; right: 0; bottom: -.5rem; height: 2px; background: var(--color-secondary); }
 .has-menu { position: relative; display: inline-flex; }
 .menu { display: none; position: absolute; right: -1rem; top: 2rem; z-index: 20; min-width: 11rem;
   background: var(--color-background); border: 1px solid var(--border-hairline); border-radius: var(--radius-md); padding: var(--space-2) var(--space-4); }
