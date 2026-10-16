@@ -6,7 +6,8 @@ import { allNotes, shortDay } from '../../lib/garden';
 const notes = await allNotes();
 // The notes that were the Kanjectures on the old site, in her order.
 const startHere = notes.filter((n) => n.data.kanjecture !== undefined).sort((a, b) => a.data.kanjecture! - b.data.kanjecture!);
-const recent = notes.slice(0, 12);
+// Recently tended leaves out the notes already listed under Start here.
+const recent = notes.filter((n) => n.data.kanjecture === undefined).slice(0, 12);
 const intro = await getEntry('pages', 'kanjectures');
 const Intro = intro ? (await render(intro)).Content : null;
 ---
@@ -22,8 +23,8 @@ const Intro = intro ? (await render(intro)).Content : null;
       {startHere.length > 0 && (
         <>
           <h2 class="section-title">Start here</h2>
-          <div class="rows">
-            {startHere.map((n) => <a href={`/garden/${n.id}`}><b>{n.data.title}</b></a>)}
+          <div class="rows dated">
+            {startHere.map((n) => <a href={`/garden/${n.id}`}><b>{n.data.title}</b><span class="label">{shortDay(n.data.updated)}</span></a>)}
           </div>
         </>
       )}
