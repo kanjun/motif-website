@@ -48,15 +48,40 @@
 .version del, .history-intro del { background: color-mix(in oklab, var(--color-secondary) 70%, transparent); }
 .history-back a { color: var(--text-secondary); }
 
-/* Phones: one note at a time, as ordinary pages. */
+/* Phones: the open notes sit side by side, one screen each; swipe between them.
+   Tapping a link slides up a peek of the note before opening it. */
 @media (max-width: 800px) {
-  .garden-page { height: auto; display: block; overflow: visible; }
-  .stack { display: block; overflow: visible; padding: 0; }
-  .pane, .pane.home { position: static; width: auto; height: auto; }
-  .pane.paper { border-radius: 0; box-shadow: none; }
-  .pane-body, .pane.home .pane-body { padding: var(--space-8) var(--space-6) var(--space-12); overflow: visible; }
+  .garden-page { height: 100dvh; display: flex; flex-direction: column; overflow: hidden; }
+  .stack { display: flex; flex: 1; min-height: 0; overflow-x: auto; overflow-y: hidden; padding: 0; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: none; }
+  .stack::-webkit-scrollbar { display: none; }
+  .pane, .pane.home { flex: 0 0 100%; width: 100%; height: 100%; position: relative; left: 0; scroll-snap-align: start; scroll-snap-stop: always; }
+  .pane-body, .pane.home .pane-body { overflow-y: auto; padding: var(--space-8) var(--space-6) calc(var(--space-16) + 2rem); }
+  .pane.paper { border-radius: 0; box-shadow: -10px 0 18px -16px rgba(45, 0, 96, .5); }
   .spine { display: none; }
   .popover { display: none !important; }
+
+  .note-dots { position: fixed; left: 50%; bottom: max(12px, env(safe-area-inset-bottom)); transform: translateX(-50%); z-index: 40; display: flex; gap: 10px; padding: 8px 12px;
+    background: color-mix(in oklab, var(--color-background) 88%, transparent); border-radius: 999px; }
+  .note-dots[hidden] { display: none; }
+  .note-dots button { width: 8px; height: 8px; padding: 0; border: 1px solid var(--text-heading); border-radius: 50%; background: transparent; }
+  .note-dots button.on { background: var(--text-heading); }
+
+  .peek { position: fixed; inset: 0; z-index: 60; }
+  .peek[hidden] { display: none; }
+  .peek-backdrop { position: absolute; inset: 0; background: rgba(26, 17, 25, .28); opacity: 0; transition: opacity .2s; }
+  .peek-card { position: absolute; left: 0; right: 0; bottom: 0; max-height: 62dvh; display: flex; flex-direction: column; background: var(--web-white);
+    border-radius: 14px 14px 0 0; box-shadow: 0 -12px 30px -16px rgba(45, 0, 96, .5); transform: translateY(100%); transition: transform .22s ease-out; }
+  .peek.up .peek-backdrop { opacity: 1; }
+  .peek.up .peek-card { transform: none; }
+  .peek-grip { flex: none; width: 36px; height: 4px; margin: 10px auto 0; border-radius: 2px; background: var(--border-hairline); }
+  .peek-body { overflow-y: auto; padding: var(--space-4) var(--space-6) var(--space-2); font-size: .95rem; line-height: 1.55;
+    -webkit-mask-image: linear-gradient(#000 80%, transparent); mask-image: linear-gradient(#000 80%, transparent); }
+  .peek-body .title { font-size: 1.25rem; margin-bottom: var(--space-2); }
+  .peek-body a { pointer-events: none; }
+  .peek-actions { flex: none; display: flex; gap: var(--space-3); padding: var(--space-3) var(--space-6) max(var(--space-4), env(safe-area-inset-bottom)); }
+  .peek-actions button { flex: 1; padding: .85rem; border: 1px solid var(--border-hairline); border-radius: 999px; background: transparent; color: var(--text-heading);
+    font-family: var(--font-label); font-size: .75rem; text-transform: uppercase; letter-spacing: .12em; }
+  .peek-actions .peek-open { background: var(--text-heading); border-color: var(--text-heading); color: var(--web-white); }
 }
 
 /* Kanjectures starts at the same left edge as the centred pages; notes open to the

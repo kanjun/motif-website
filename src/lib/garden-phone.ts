@@ -1,7 +1,6 @@
 // Kanjectures on a phone: the notes you've opened sit side by side, one screen each,
 // and you swipe between them. Tapping a link first shows a peek of that note from
 // the bottom of the screen; "Open note" adds it to the right and slides over to it.
-import '../styles/garden-phone.css';
 import { fetchPane, panes, slugOf, writeUrl } from './garden-client';
 
 const isPhone = () => window.matchMedia('(max-width: 800px)').matches;
