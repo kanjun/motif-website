@@ -5,7 +5,7 @@ import { diffWords, simpleMarkdown } from '../../../lib/diff';
 
 export async function getStaticPaths() {
   const histories = await getCollection('gardenHistory');
-  return histories.map((h) => ({ params: { note: h.id } }));
+  return histories.filter((h) => h.data.versions.length > 1).map((h) => ({ params: { note: h.id } }));
 }
 
 const slug = Astro.params.note!;
@@ -22,7 +22,6 @@ const when = (d: Date) =>
       <div class="note content">
         <p class="history-back"><a href={`/garden/${slug}`} data-no-stack>← {note!.data.title}</a></p>
         <h1 class="title">History</h1>
-        <p class="history-intro">Every published version of this note, newest first. Words added in each version are <ins>highlighted</ins>; removed words are <del>struck through</del>.</p>
         {versions.map((v, i) => (
           <details class="version" open={i === 0}>
             <summary>{when(v.date)}{i === 0 ? ' · current' : ''}{i === versions.length - 1 ? ' · first published' : ''}</summary>

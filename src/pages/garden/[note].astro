@@ -7,7 +7,8 @@ import { allNotes, backlinksByNote, type Backlink, type Note } from '../../lib/g
 export async function getStaticPaths() {
   const notes = await allNotes();
   const backlinks = await backlinksByNote();
-  const histories = new Set((await getCollection('gardenHistory')).map((h) => h.id));
+  // A note links to its history only once it has more than one published version.
+  const histories = new Set((await getCollection('gardenHistory')).filter((h) => h.data.versions.length > 1).map((h) => h.id));
   return notes.map((note) => ({
     params: { note: note.id },
     props: { note, backlinks: backlinks.get(note.id) ?? [], hasHistory: histories.has(note.id) },
