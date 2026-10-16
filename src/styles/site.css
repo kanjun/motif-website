@@ -181,8 +181,10 @@ p { margin: 0 0 1em; }
 .content a, .rows .sub a, .card a { color: var(--link); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .15em; }
 
 /* Talks: videos in two columns, each with its year and title. */
-/* One talk per row: big videos, and a title of any length sits right above its own video. */
-.talks { display: grid; grid-template-columns: 1fr; gap: var(--space-12); margin-top: var(--space-8); max-width: 48rem; }
+/* Two big talks per row, using the full width of the page. */
+.page-main.wide:has(.talks) { flex-basis: 100%; }
+.talks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-12) var(--space-6); margin-top: var(--space-8); }
+.talk .embed, .talk .player { margin-bottom: var(--space-3); }
 .talk .embed, .talk .player { display: flex; align-items: center; justify-content: center; width: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: var(--radius-md);
   background: var(--web-white) center / cover no-repeat; cursor: pointer; padding: 0; }
 .talk.audio .embed, .talk .player.audio { aspect-ratio: auto; height: 152px; }
