@@ -1,5 +1,5 @@
 ---
-title: Notes
+title: Sketches
 pageTitle: "Kanjun Qiu ∙ Notes"
 description: "Raw visual notes from learning various subjects."
 sidebarRow: 5
