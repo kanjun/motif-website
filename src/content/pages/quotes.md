@@ -1,5 +1,5 @@
 ---
-title: Quotes
+title: "Library: Quotes"
 pageTitle: "Kanjun Qiu ∙ Quotes"
 description: "Quotes & passages I found striking."
 sidebarRow: 6

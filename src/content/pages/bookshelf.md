@@ -1,5 +1,5 @@
 ---
-title: Bookshelf
+title: "Library: Bookshelf (not shown yet)"
 pageTitle: "Kanjun Qiu ∙ Bookshelf"
 description: "Books I'm reading and have enjoyed."
 sidebarRow: 6

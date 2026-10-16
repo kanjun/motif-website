@@ -1,5 +1,5 @@
 ---
-title: Kanjectures
+title: "Kanjectures: intro"
 pageTitle: "Kanjun Qiu ∙ Kanjectures"
 description: "Generating explanations of the world is my favorite activity to do with friends."
 sidebarRow: 3
