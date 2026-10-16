@@ -17,7 +17,3 @@ Thumbs.db
 .env
 .env.*
 
-# Preview-only garden notes (never published)
-src/content/garden-preview/
-src/content/garden-history-preview/
-public/garden-preview-files/
