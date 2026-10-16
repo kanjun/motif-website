@@ -1,7 +1,7 @@
 ---
 title: "Technological and social change are critical to each other"
 created: 2026-10-16T06:57:12Z
-updated: 2026-10-16T06:57:12Z
+updated: 2026-10-16T07:27:10Z
 kanjecture: 8
 ---
 
@@ -11,9 +11,4 @@ Technology enables social change (though it's certainly not the *only* enabler).
 
 And social context affects what technologies get developed. Would the personal computer / development of UI have happened without 1960s counterculture? Likely not.
 
-<aside class="callout callout-claude" markdown="1">
-<p class="callout-title">Claude&#x27;s words</p>
-
-Related: Technology is inherently political, Making technology good requires imagination
-
-</aside>
+> Related: Technology is inherently political, Making technology good requires imagination
