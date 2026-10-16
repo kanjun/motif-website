@@ -1,0 +1,14 @@
+---
+title: "Refusing to tolerate"
+created: 2026-10-16T07:21:11Z
+updated: 2026-10-16T07:21:11Z
+kanjecture: 3
+---
+
+Every New Year, I go through every item I own and use Marie Kondo's "does this item spark joy?" criterion to decide what to keep.
+
+This is surprisingly helpful for my leadership ability. Marie Kondo's method is about **refusing to tolerate**. Repeating this process for a hundred objects teaches me to get in touch with my internal sense of what's beautiful, what's important, what's joyful.
+
+There's a big gap between "this is so bad I want to get rid of it" and "this is so good I'm drawn to keeping it". In that gap is everything we tolerate. Marie Kondo's bar of "Does this spark joy?" teaches us to refuse to surround ourselves with things we tolerate; to thank them for their role in our lives, and then to let them go. Once we calibrate on this for objects, we can detect toleration for everything else in our lives. Things we tolerate take up physical and mental space. It's worth cleaning out everything and everyone we tolerate, so we can be surrounded by what we love.
+
+> Related: Frequently KonMari your tasks and goals
