@@ -9,7 +9,7 @@
 .pane.home { flex-basis: 40rem; width: 40rem; }
 .pane.paper { background: var(--web-white); border-radius: 6px 6px 0 0; box-shadow: -12px 0 26px -20px rgba(45, 0, 96, .45); }
 .pane-body { flex: 1; overflow-y: auto; min-width: 0; padding: var(--space-12) var(--space-12) var(--space-16) var(--space-2); }
-.pane.home .pane-body { padding-left: var(--space-8); }
+.pane.home .pane-body { padding-left: var(--space-2); } /* lines up with the text on every other page */
 .spine { flex: 0 0 var(--spine-w); display: block; text-decoration: none; color: var(--text-heading); opacity: 0; transition: opacity .15s; pointer-events: none; }
 .spine span { display: block; writing-mode: vertical-lr; padding: var(--space-6) 0 0 .85rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-height: 100%; }
 .pane.collapsed .spine { opacity: 1; pointer-events: auto; cursor: pointer; }
