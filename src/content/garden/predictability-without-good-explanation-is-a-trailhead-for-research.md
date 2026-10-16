@@ -1,7 +1,7 @@
 ---
 title: "Predictability without good explanation is a trailhead for research"
 created: 2026-10-16T07:21:11Z
-updated: 2026-10-16T07:21:11Z
+updated: 2026-10-16T07:51:10Z
 kanjecture: 10
 ---
 
@@ -9,4 +9,4 @@ Things that are predicable, but for which we don't have a good explanation, prov
 
 *Credit to [Laura Deming](http://laurademing.com/) for the conversation that generated this, and to Hongyi Li, for pointing out that my original formulation violated Gödel's incompleteness theorem.*
 
-> Related: Curious people already have the skills to do research
+Related: Curious people already have the skills to do research

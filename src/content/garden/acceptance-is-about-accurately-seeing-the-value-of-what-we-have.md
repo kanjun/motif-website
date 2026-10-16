@@ -1,7 +1,7 @@
 ---
 title: "Acceptance is about accurately seeing the value of what we have"
-created: 2026-10-16T06:57:12Z
-updated: 2026-10-16T07:27:10Z
+created: 2026-10-16T07:27:10Z
+updated: 2026-10-16T07:51:10Z
 kanjecture: 1
 ---
 
@@ -9,4 +9,4 @@ People misunderstand what is meant by "acceptance" in meditation and Eastern tex
 
 Acceptance allows us to properly value what we have. This means we can then see how to spend our energy building on top of what's currently valuable. This means value gained per energy spent is much higher, because we're building on existing value rather than trying to find value in a totally new place.
 
-> Related: Acceptance versus control
+Related: Acceptance versus control
