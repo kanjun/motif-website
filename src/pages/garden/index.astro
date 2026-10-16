@@ -18,7 +18,6 @@ const Intro = intro ? (await render(intro)).Content : null;
     <div class="pane-body">
       <h1 class="title">Kanjectures</h1>
       <div class="content intro">{Intro && <Intro />}</div>
-      <p class="hint">Notes link to each other. Click a link and it opens beside the note you’re reading.</p>
       {notes.length === 0 && <p>The first notes are still growing. Check back soon.</p>}
       {startHere.length > 0 && (
         <>
