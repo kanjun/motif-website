@@ -1,8 +1,6 @@
 ---
 import Header from '../components/Header.astro';
 import '../styles/site.css';
-// The draft phone layout shows in the editor's preview only, never on the live site.
-import phoneDraft from '../styles/phone-draft.css?raw';
 import '../styles/tufte-sidenotes.css';
 
 export interface TocItem {
@@ -92,7 +90,5 @@ const ogImageUrl = new URL(ogImage, Astro.site).href;
         littlefoot({ activateOnHover: true, hoverDelay: 100 });
       }
     </script>
-    {/* Last in the page so it wins over the preview's own styles. */}
-    {import.meta.env.DEV && <style is:inline set:html={phoneDraft} />}
   </body>
 </html>
