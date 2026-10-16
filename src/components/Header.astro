@@ -1,13 +1,11 @@
 ---
-// The bar along the top of every page: name and portrait, social links, and the sections.
+// The bar along the top of every page: name and portrait, the sections beside it, and social links at the far right.
 // `section` is the section this page belongs to; it gets the pink underline.
 interface Props {
   section?: 'essays' | 'kanjectures' | 'talks' | 'library';
 }
 
 const { section } = Astro.props;
-// Preview only: ?nav=left puts the sections by the name and the social links on the right.
-const preview = import.meta.env.DEV;
 
 // Icons are from Simple Icons (CC0); the podcast microphone is drawn here.
 const socials = [
@@ -30,16 +28,7 @@ const library = [
 ---
 
 <header class="top">
-  <div class="who-wrap">
-    <a class="who" href="/"><img src="/images/kanjun.png" alt="" />Kanjun Qiu</a>
-    <span class="socials">
-      {socials.map((s) => (
-        <a class="soc" href={s.href} data-label={s.name} aria-label={s.name}>
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d={s.path} /></svg>
-        </a>
-      ))}
-    </span>
-  </div>
+  <a class="who" href="/"><img src="/images/kanjun.png" alt="" />Kanjun Qiu</a>
   <nav class="sections">
     {sections.map((s) => (
       <a class="label" href={s.href} aria-current={section === s.id ? 'page' : undefined}>{s.name}</a>
@@ -51,10 +40,12 @@ const library = [
       </div>
     </span>
   </nav>
+  <span class="socials">
+      {socials.map((s) => (
+        <a class="soc" href={s.href} data-label={s.name} aria-label={s.name}>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d={s.path} /></svg>
+        </a>
+      ))}
+  </span>
 </header>
 
-{preview && (
-  <script is:inline>
-    if (new URLSearchParams(location.search).get('nav') === 'left') document.querySelector('.top').classList.add('nav-left');
-  </script>
-)}
