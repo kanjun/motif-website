@@ -46,7 +46,7 @@ const toc = [
       <div class="sketches">
         {sketches.map((s) => (
           <div class="sketch">
-            <a href={s.image} target="_blank" rel="noopener"><img src={s.image} alt={s.alt} /></a>
+            <a href={s.image} class="zoom" data-title={s.title}><img src={s.image} alt={s.alt} /></a>
             <b>{s.title}</b>
             {s.html && <span class="sub" set:html={s.html} />}
           </div>
@@ -55,3 +55,26 @@ const toc = [
     </>
   )}
 </BaseLayout>
+
+<dialog class="lightbox" id="lightbox">
+  <figure>
+    <img alt="" />
+    <figcaption class="label"></figcaption>
+  </figure>
+  <button type="button" class="close label" aria-label="Close">Close</button>
+</dialog>
+
+<script>
+  // A sketch opens full size over the page; click anywhere or press Escape to close.
+  const box = document.getElementById('lightbox') as HTMLDialogElement;
+  document.querySelectorAll<HTMLAnchorElement>('a.zoom').forEach((a) => {
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      box.querySelector('img')!.src = a.href;
+      box.querySelector('img')!.alt = a.querySelector('img')?.alt ?? '';
+      box.querySelector('figcaption')!.textContent = a.dataset.title ?? '';
+      box.showModal();
+    });
+  });
+  box.addEventListener('click', () => box.close());
+</script>

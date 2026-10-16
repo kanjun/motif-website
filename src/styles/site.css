@@ -173,3 +173,11 @@ a.talk-title:hover { text-decoration: underline; text-decoration-color: var(--co
 
 /* On wide pages (Library, Talks) text runs the full width of the cards beside it. */
 .page-main.wide .content { max-width: none; }
+
+/* A sketch, full size over the page. */
+.lightbox { border: 0; padding: 0; max-width: none; max-height: none; width: 100vw; height: 100vh; background: color-mix(in oklab, var(--color-background) 92%, transparent); cursor: zoom-out; }
+.lightbox::backdrop { background: transparent; }
+.lightbox figure { margin: 0; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-3); padding: var(--space-8); }
+.lightbox img { max-width: 100%; max-height: calc(100vh - 6rem); object-fit: contain; border-radius: var(--radius-md); background: var(--web-white); }
+.lightbox .close { position: fixed; top: var(--space-6); right: var(--space-8); background: none; border: 0; cursor: pointer; }
+a.zoom { cursor: zoom-in; display: block; }
