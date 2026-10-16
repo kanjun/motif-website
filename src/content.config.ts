@@ -33,6 +33,8 @@ const essays = defineCollection({
     url: z.string().url().optional(),
     coauthor: z.string().optional(),
     coauthorUrl: z.string().url().optional(),
+    // One quiet line shown under the essay in the list, e.g. where it was cited. Markdown links allowed.
+    aside: z.string().optional(),
   }),
 });
 

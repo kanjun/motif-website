@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { formatDate } from '../../lib/dates';
+import { inline } from '../../lib/library';
 
 // Newest first. Essays with a `url` link out; the rest live at /writing/<name>.
 const essays = (await getCollection('essays')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
@@ -15,11 +16,14 @@ const essays = (await getCollection('essays')).sort((a, b) => b.data.date.getTim
   <h1 class="title">Essays</h1>
   <div class="rows essays">
     {essays.map((essay) => (
-      <a href={essay.data.url ?? `/writing/${essay.id}`}>
-        <span class="label">{formatDate(essay.data.date)}{essay.data.coauthor && ` · with ${essay.data.coauthor}`}</span>
-        <b>{essay.data.title}</b>
-        {essay.data.excerpt && <span class="sub">{essay.data.excerpt}</span>}
-      </a>
+      <div class="essay">
+        <a href={essay.data.url ?? `/writing/${essay.id}`}>
+          <span class="label">{formatDate(essay.data.date)}{essay.data.coauthor && ` · with ${essay.data.coauthor}`}</span>
+          <b>{essay.data.title}</b>
+          {essay.data.excerpt && <span class="sub">{essay.data.excerpt}</span>}
+        </a>
+        {essay.data.aside && <p class="essay-aside" set:html={inline(essay.data.aside)} />}
+      </div>
     ))}
   </div>
 </BaseLayout>
