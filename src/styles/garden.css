@@ -19,8 +19,6 @@
 .pane-solo { flex-basis: min(46rem, 100%); width: auto; position: static; }
 .pane-solo .pane-body { padding-left: var(--space-12); }
 
-/* Paper is brighter than the page, so the same text reads heavier on it: a touch thinner evens it out. */
-.paper .note p, .paper .note li, .paper .rows .sub, .paper .callout { font-weight: 360; }
 
 .note.content { max-width: none; }
 .note a[href^="/garden/"] { text-decoration-style: dotted; text-decoration-thickness: 1.5px; text-underline-offset: .2em; }

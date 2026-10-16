@@ -28,10 +28,11 @@ export async function backlinksByNote(): Promise<Map<string, Backlink[]>> {
   const notes = await allNotes();
   const result = new Map<string, Backlink[]>();
   for (const note of notes) {
-    // A link in a callout box (Claude's "Related" line) is previewed with the note's own opening words.
+    // A link in a callout box or a "Related:" line is previewed with the note's own opening words.
     const body = note.body ?? '';
     const callouts = [...body.matchAll(CALLOUT)].map((m) => m[0]);
-    const lead = body.replace(CALLOUT, '').split(/\n\s*\n/).find((p) => p.trim()) ?? '';
+    const isRelated = (p: string) => /^\s*Related:/.test(p);
+    const lead = body.replace(CALLOUT, '').split(/\n\s*\n/).find((p) => p.trim() && !isRelated(p)) ?? '';
     const seen = new Set<string>();
     for (const paragraph of [...body.replace(CALLOUT, '').split(/\n\s*\n/), ...callouts]) {
       const targets = new Set([...paragraph.matchAll(LINK)].map((m) => m[2]));
@@ -39,7 +40,7 @@ export async function backlinksByNote(): Promise<Map<string, Backlink[]>> {
         if (target === note.id || seen.has(target)) continue;
         seen.add(target);
         if (!result.has(target)) result.set(target, []);
-        result.get(target)!.push({ note, context: plain(callouts.includes(paragraph) ? lead : paragraph) });
+        result.get(target)!.push({ note, context: plain(callouts.includes(paragraph) || isRelated(paragraph) ? lead : paragraph) });
       }
     }
   }
