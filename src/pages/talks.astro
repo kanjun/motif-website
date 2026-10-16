@@ -34,14 +34,14 @@ const talks = parts.map((part) => {
   <div class="talks">
     {talks.map((t) => (
       <div class:list={['talk', { audio: t.audio }]}>
+        <span class="label">{t.year}</span>
+        {t.url ? <a class="talk-title" href={t.url}>{t.title}</a> : <span class="talk-title">{t.title}</span>}
         {/* A still with a play button; the player loads only when clicked. Pages
             stay light, and the editor's preview never starts a player. */}
         <button class="embed" type="button" data-src={t.src} data-audio={t.audio ? '1' : undefined}
           style={t.thumb ? `background-image:url(${t.thumb})` : undefined} aria-label={`Play: ${t.title}`}>
           <span class="play label">{t.audio ? 'Listen' : 'Play'}</span>
         </button>
-        <span class="label">{t.year}</span>
-        {t.url ? <a class="talk-title" href={t.url}>{t.title}</a> : <span class="talk-title">{t.title}</span>}
       </div>
     ))}
   </div>
@@ -55,6 +55,8 @@ const talks = parts.map((part) => {
       frame.src = src + (src.includes('youtube') ? (src.includes('?') ? '&' : '?') + 'autoplay=1' : '');
       frame.allow = 'autoplay; encrypted-media; fullscreen; picture-in-picture';
       frame.allowFullscreen = true;
+      // Without this YouTube can't tell which site embeds it and shows a configuration error.
+      frame.referrerPolicy = 'strict-origin-when-cross-origin';
       frame.className = button.dataset.audio ? 'player audio' : 'player';
       button.replaceWith(frame);
     });
