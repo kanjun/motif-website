@@ -3,7 +3,7 @@ title: About
 pageTitle: Kanjun Qiu
 description: I'm Kanjun ('can-june'). I believe humanity has tremendous latent potential, both individually and collectively.
 sidebarRow: 1
-greeting: Hi! I'm Kanjun.
+greeting: 'Hi! I''m Kanjun ("can-june").'
 headline: I believe humanity has tremendous latent potential, both individually and collectively.
 ---
 
