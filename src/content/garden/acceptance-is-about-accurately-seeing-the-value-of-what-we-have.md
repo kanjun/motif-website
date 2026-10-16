@@ -1,0 +1,17 @@
+---
+title: "Acceptance is about accurately seeing the value of what we have"
+created: 2026-10-16T06:57:12Z
+updated: 2026-10-16T06:57:12Z
+kanjecture: 1
+---
+
+People misunderstand what is meant by "acceptance" in meditation and Eastern texts. Acceptance is about accurately computing ("seeing") the value of what we have. If we don't accept what we have, then we're ignoring its value. This results in wasteful behavior: we'll spend a lot of energy throwing away what we have and seeking out value in other places (grass is greener syndrome) that's not actually higher than what we have, but that we perceive as being higher because we undervalue what we have.
+
+Acceptance allows us to properly value what we have. This means we can then see how to spend our energy building on top of what's currently valuable. This means value gained per energy spent is much higher, because we're building on existing value rather than trying to find value in a totally new place.
+
+<aside class="callout callout-claude" markdown="1">
+<p class="callout-title">Claude&#x27;s words</p>
+
+Related: Acceptance versus control
+
+</aside>
