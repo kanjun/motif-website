@@ -1,7 +1,7 @@
 ---
 title: "Refusing to tolerate"
 created: 2026-10-16T07:21:11Z
-updated: 2026-10-16T07:51:10Z
+updated: 2026-10-16T07:21:11Z
 kanjecture: 3
 ---
 

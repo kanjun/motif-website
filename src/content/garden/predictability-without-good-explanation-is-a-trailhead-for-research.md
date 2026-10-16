@@ -1,7 +1,7 @@
 ---
 title: "Predictability without good explanation is a trailhead for research"
 created: 2026-10-16T07:21:11Z
-updated: 2026-10-16T07:51:10Z
+updated: 2026-10-16T07:21:11Z
 kanjecture: 10
 ---
 
