@@ -133,7 +133,9 @@ p { margin: 0 0 1em; }
 .card .quote strong { font-weight: 600; }
 .subsection { font-size: 1.25rem; font-weight: 500; margin: var(--space-12) 0 var(--space-4); scroll-margin-top: var(--space-8); }
 .sketches { display: grid; grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr)); gap: var(--space-4); }
-.sketches a { color: var(--text-body); text-decoration: none; }
+.sketch b { display: block; font-weight: 500; }
+.sketch .sub { display: block; color: var(--text-secondary); font-size: .9rem; line-height: 1.5; margin-top: var(--space-1); }
+.sketch .sub a { color: inherit; text-decoration: underline; }
 .sketches img { aspect-ratio: 4 / 3; object-fit: cover; width: 100%; border-radius: var(--radius-md); margin-bottom: var(--space-2); background: var(--web-white); }
 
 /* ---- phones ------------------------------------------------------------ */

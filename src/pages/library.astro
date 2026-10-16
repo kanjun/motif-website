@@ -1,0 +1,57 @@
+---
+import { getEntry } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { inline, parseQuotes, parseSketches } from '../lib/library';
+
+const quotesPage = await getEntry('pages', 'quotes');
+const notesPage = await getEntry('pages', 'notes');
+const groups = parseQuotes(quotesPage?.body ?? '');
+const images = Object.fromEntries(
+  Object.entries(import.meta.glob<{ default: { src: string } }>('../assets/images/*', { eager: true })).map(
+    ([path, mod]) => [path.split('/').pop()!, mod.default.src],
+  ),
+);
+const { intro, sketches } = parseSketches(notesPage?.body ?? '', images);
+
+const toc = [
+  ...groups.map((g, i) => ({ id: g.id, label: g.title, count: g.quotes.length, sub: i > 0 })),
+  ...(sketches.length ? [{ id: 'sketches', label: 'Sketches', count: sketches.length }] : []),
+];
+---
+
+<BaseLayout title="Library ∙ Kanjun Qiu" description="Quotes and passages I found striking, and sketches I drew while learning." section="library" toc={toc} wide>
+  <h1 class="title">Library</h1>
+  <p class="content">What I’ve learned from other people: passages that stuck, and the sketches I drew while learning.</p>
+
+  {groups.map((g, i) => (
+    <>
+      {i === 0 ? <h2 class="section-title" id={g.id}>{g.title}</h2> : <h3 class="subsection" id={g.id}>{g.title}</h3>}
+      <div class="cards">
+        {g.quotes.map((q) => (
+          <div class="card">
+            <p class="quote" set:html={q.html} />
+            <span class="label">{q.by}</span>
+          </div>
+        ))}
+      </div>
+    </>
+  ))}
+
+  {sketches.length > 0 && (
+    <>
+      <h2 class="section-title" id="sketches">Sketches</h2>
+      <div class="content">
+        {intro.split(/\n\s*\n/).map((p) => <p set:html={inline(p)} />)}
+      </div>
+      <div class="sketches">
+        {sketches.map((s) => (
+          <div class="sketch">
+            <a href={s.image} target="_blank" rel="noopener"><img src={s.image} alt={s.alt} /></a>
+            <b>{s.title}</b>
+            {s.html && <span class="sub" set:html={s.html} />}
+          </div>
+        ))}
+      </div>
+    </>
+  )}
+</BaseLayout>

@@ -12,6 +12,13 @@ export default defineConfig({
   markdown: {
     remarkPlugins: [remarkSidenotes],
   },
+  // Old addresses keep working: these pages now live inside others.
+  redirects: {
+    '/quotes': '/library#quotes',
+    '/notes': '/library#sketches',
+    '/bookshelf': '/library',
+    '/kanjectures': '/garden',
+  },
   // Content folder is your Obsidian vault
   srcDir: './src',
 });
