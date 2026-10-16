@@ -36,7 +36,7 @@ const library = [
     <span class="has-menu">
       <a class="label" href="/library" aria-current={section === 'library' ? 'page' : undefined}>Library</a>
       <div class="menu">
-        {library.map((l) => <a href={l.href}>{l.name}</a>)}
+        {library.map((l) => <a class="label" href={l.href}>{l.name}</a>)}
       </div>
     </span>
   </nav>
