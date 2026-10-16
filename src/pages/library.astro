@@ -1,17 +1,25 @@
 ---
 import { getEntry } from 'astro:content';
+import { getImage } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { inline, parseQuotes, parseSketches } from '../lib/library';
 
 const quotesPage = await getEntry('pages', 'quotes');
 const notesPage = await getEntry('pages', 'notes');
 const groups = parseQuotes(quotesPage?.body ?? '');
-const images = Object.fromEntries(
-  Object.entries(import.meta.glob<{ default: { src: string } }>('../assets/images/*', { eager: true })).map(
-    ([path, mod]) => [path.split('/').pop()!, mod.default.src],
+const assets = Object.fromEntries(
+  Object.entries(import.meta.glob<{ default: ImageMetadata }>('../assets/images/*', { eager: true })).map(
+    ([path, mod]) => [path.split('/').pop()!, mod.default],
   ),
 );
-const { intro, sketches } = parseSketches(notesPage?.body ?? '', images);
+const images = Object.fromEntries(Object.entries(assets).map(([name, img]) => [name, img.src]));
+const { intro, sketches: parsed } = parseSketches(notesPage?.body ?? '', images);
+// Small thumbnails for the grid (the drawings are half a megabyte each); the full drawing opens on click.
+const sketches = await Promise.all(parsed.map(async (s) => {
+  const file = Object.keys(images).find((name) => images[name] === s.image);
+  const thumb = file ? (await getImage({ src: assets[file], width: 640, format: 'webp' })).src : s.image;
+  return { ...s, thumb };
+}));
 
 const toc = [
   ...groups.map((g, i) => ({ id: g.id, label: g.title, count: g.quotes.length, sub: i > 0 })),
@@ -46,7 +54,7 @@ const toc = [
       <div class="sketches">
         {sketches.map((s) => (
           <div class="sketch">
-            <a href={s.image} class="zoom" data-title={s.title}><img src={s.image} alt={s.alt} /></a>
+            <a href={s.image} class="zoom" data-title={s.title}><img src={s.thumb} alt={s.alt} width="640" height="480" /></a>
             <b>{s.title}</b>
             {s.html && <span class="sub" set:html={s.html} />}
           </div>
