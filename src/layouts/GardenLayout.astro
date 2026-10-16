@@ -1,4 +1,5 @@
 ---
+import GoogleAnalytics from '../components/GoogleAnalytics.astro';
 import Header from '../components/Header.astro';
 import '../styles/site.css';
 import '../styles/garden.css';
@@ -24,6 +25,7 @@ const { title, description = 'Kanjectures: Kanjun Qiu’s working notes.' } = As
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300..800;1,300..800&family=DM+Mono:wght@400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..600;1,8..60,400..600&display=swap" rel="stylesheet" />
+    <GoogleAnalytics />
   </head>
   <body class="garden-page">
     <Header section="kanjectures" />

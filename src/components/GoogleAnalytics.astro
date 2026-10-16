@@ -1,0 +1,17 @@
+---
+// Google Analytics (property "kanjun.me", stream "Website"). Only on the
+// built site, so visits to the editor's live preview are not counted.
+const MEASUREMENT_ID = 'G-ZQ7Y2ZTHD9';
+---
+
+{import.meta.env.PROD && (
+  <>
+    <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${MEASUREMENT_ID}`}></script>
+    <script is:inline define:vars={{ MEASUREMENT_ID }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', MEASUREMENT_ID);
+    </script>
+  </>
+)}
