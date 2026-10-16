@@ -5,13 +5,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 const page = await getEntry('pages', 'about');
 if (!page) throw new Error('Missing src/content/pages/about.md');
 const { Content, headings } = await render(page);
-const { pageTitle, title, description, ogImage, greeting, headline } = page.data;
-const toc = headings.filter((h) => h.depth <= 3).map((h) => ({ id: h.slug, label: h.text }));
+const { pageTitle, title, description, ogImage } = page.data;
+// The page's own first heading (# ...) is its big opening line; the contents list covers the sections below it.
+const toc = headings.filter((h) => h.depth >= 2 && h.depth <= 3).map((h) => ({ id: h.slug, label: h.text }));
 ---
 
 <BaseLayout title={pageTitle ?? title} description={description} ogImage={ogImage} toc={toc}>
-  {greeting && <p class="lede-hi">{greeting}</p>}
-  <h1 class="title">{headline ?? title}</h1>
   <div class="content">
     <Content />
   </div>

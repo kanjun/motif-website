@@ -95,6 +95,7 @@ p { margin: 0 0 1em; }
 .content p, .content li { line-height: var(--leading); }
 .content h2, .content h3 { font-size: 1.5rem; line-height: 1.25; font-weight: 500; margin: var(--space-12) 0 var(--space-4); scroll-margin-top: var(--space-8); }
 .content h2 a, .content h3 a { color: inherit; }
+.content h1 { font-size: 2rem; line-height: 1.15; font-weight: 500; margin: 0 0 var(--space-6); text-wrap: pretty; }
 .content h4 { font-size: 1rem; font-weight: 600; margin: var(--space-8) 0 var(--space-2); }
 .content ul { list-style: none; padding: 0; margin: 0 0 1em; }
 .content ul li { position: relative; padding: 0 0 var(--space-3) var(--space-6); }

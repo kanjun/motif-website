@@ -3,11 +3,11 @@ title: About
 pageTitle: Kanjun Qiu
 description: I'm Kanjun ('can-june'). I believe humanity has tremendous latent potential, both individually and collectively.
 sidebarRow: 1
-greeting: 'Hi! I''m Kanjun ("can-june").'
-headline: I believe humanity has tremendous latent potential, both individually and collectively.
 ---
 
-To this end, I'm interested in enabling greater agency, creativity, and abundance—particularly through transforming our beliefs, our understanding of the world, and our understanding of ourselves.
+# Hi! I'm Kanjun ("can-june").
+
+I believe humanity has tremendous latent potential, both individually and collectively. To this end, I'm interested in enabling greater agency, creativity, and abundance—particularly through transforming our beliefs, our understanding of the world, and our understanding of ourselves.
 
 If you don't have my email, the best way to reach me is via [Twitter DM](https://www.twitter.com/kanjun). Fair warning: I do not respond quickly to messages. 
 
