@@ -6,14 +6,14 @@ const SPINE = 44; // matches --spine-w (2.75rem) in garden.css
 const isWide = () => window.matchMedia('(min-width: 801px)').matches;
 const pageCache = new Map<string, Promise<HTMLElement | null>>();
 
-function slugOf(href: string): string | null {
+export function slugOf(href: string): string | null {
   const url = new URL(href, location.href);
   if (url.origin !== location.origin) return null;
   const m = url.pathname.match(/^\/garden\/([a-z0-9-]+)\/?$/);
   return m ? m[1] : null;
 }
 
-function fetchPane(slug: string): Promise<HTMLElement | null> {
+export function fetchPane(slug: string): Promise<HTMLElement | null> {
   if (!pageCache.has(slug)) {
     pageCache.set(slug, fetch(`/garden/${slug}`)
       .then((r) => (r.ok ? r.text() : Promise.reject()))
@@ -23,7 +23,7 @@ function fetchPane(slug: string): Promise<HTMLElement | null> {
   return pageCache.get(slug)!.then((pane) => (pane ? (pane.cloneNode(true) as HTMLElement) : null));
 }
 
-function panes(stack: HTMLElement): HTMLElement[] {
+export function panes(stack: HTMLElement): HTMLElement[] {
   return [...stack.querySelectorAll<HTMLElement>(':scope > .pane')];
 }
 
@@ -62,7 +62,7 @@ function markOpenLinks(stack: HTMLElement) {
   });
 }
 
-function writeUrl(stack: HTMLElement, push: boolean) {
+export function writeUrl(stack: HTMLElement, push: boolean) {
   const [first, ...rest] = panes(stack);
   const base = first.dataset.slug ? `/garden/${first.dataset.slug}` : '/garden';
   const query = rest.map((p) => `stack=${encodeURIComponent(p.dataset.slug!)}`).join('&');
@@ -149,6 +149,10 @@ function setupPopover(stack: HTMLElement) {
 export function startGarden() {
   const stack = document.getElementById('stack');
   if (!stack) return;
+  // On phones: swipe between open notes, and peek at a linked note before opening it.
+  if (!panes(stack)[0]?.classList.contains('pane-solo')) {
+    import('./garden-phone').then((m) => m.startPhone(stack));
+  }
   layout(stack);
   setupPopover(stack);
   if (!panes(stack)[0]?.classList.contains('pane-solo')) {
