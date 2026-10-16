@@ -160,8 +160,11 @@ p { margin: 0 0 1em; }
 
 /* Talks: videos in two columns, each with its year and title. */
 .talks { display: grid; grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr)); gap: var(--space-8) var(--space-6); margin-top: var(--space-8); }
-.talk .embed iframe { width: 100%; aspect-ratio: 16 / 9; height: auto; border: 0; border-radius: var(--radius-md); display: block; margin-bottom: var(--space-3); background: var(--web-white); }
-.talk.audio .embed iframe { aspect-ratio: auto; height: 152px; }
-.talk .label { display: block; margin-bottom: var(--space-1); }
+.talk .embed, .talk .player { display: flex; align-items: center; justify-content: center; width: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: var(--radius-md);
+  margin-bottom: var(--space-3); background: var(--web-white) center / cover no-repeat; cursor: pointer; padding: 0; }
+.talk.audio .embed, .talk .player.audio { aspect-ratio: auto; height: 152px; }
+.talk .play { background: var(--color-background); color: var(--text-heading); padding: .5rem .9rem; border-radius: 999px; }
+.talk .embed:hover .play { background: var(--web-white); }
+.talk > .label { display: block; margin-bottom: var(--space-1); }
 .talk-title { display: block; font-weight: 500; color: var(--text-heading); text-decoration: none; line-height: 1.4; }
 a.talk-title:hover { text-decoration: underline; text-decoration-color: var(--color-secondary); text-decoration-thickness: 2px; text-underline-offset: .2em; }

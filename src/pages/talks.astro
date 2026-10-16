@@ -13,12 +13,15 @@ const talks = parts.map((part) => {
   const text = m ? m[1] : heading;
   const [year, ...titleBits] = text.split('|');
   const embed = rest.join('\n').trim();
+  const src = embed.match(/src="([^"]+)"/)?.[1] ?? '';
+  const youtube = src.match(/youtube(?:-nocookie)?\.com\/embed\/([\w-]+)/)?.[1];
   return {
     year: titleBits.length ? year.trim() : '',
     title: (titleBits.length ? titleBits.join('|') : text).trim(),
     url: m?.[2],
-    embed: embed.replace(/\swidth="\d+"/, ' width="100%"'),
-    audio: /spotify|soundcloud|podcast/.test(embed),
+    src,
+    thumb: youtube ? `https://i.ytimg.com/vi/${youtube}/hqdefault.jpg` : '',
+    audio: /spotify|soundcloud|podcast/.test(src),
   };
 });
 ---
@@ -31,10 +34,29 @@ const talks = parts.map((part) => {
   <div class="talks">
     {talks.map((t) => (
       <div class:list={['talk', { audio: t.audio }]}>
-        <div class="embed" set:html={t.embed} />
+        {/* A still with a play button; the player loads only when clicked. Pages
+            stay light, and the editor's preview never starts a player. */}
+        <button class="embed" type="button" data-src={t.src} data-audio={t.audio ? '1' : undefined}
+          style={t.thumb ? `background-image:url(${t.thumb})` : undefined} aria-label={`Play: ${t.title}`}>
+          <span class="play label">{t.audio ? 'Listen' : 'Play'}</span>
+        </button>
         <span class="label">{t.year}</span>
         {t.url ? <a class="talk-title" href={t.url}>{t.title}</a> : <span class="talk-title">{t.title}</span>}
       </div>
     ))}
   </div>
 </BaseLayout>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('.talk .embed').forEach((button) => {
+    button.addEventListener('click', () => {
+      const frame = document.createElement('iframe');
+      const src = button.dataset.src!;
+      frame.src = src + (src.includes('youtube') ? (src.includes('?') ? '&' : '?') + 'autoplay=1' : '');
+      frame.allow = 'autoplay; encrypted-media; fullscreen; picture-in-picture';
+      frame.allowFullscreen = true;
+      frame.className = button.dataset.audio ? 'player audio' : 'player';
+      button.replaceWith(frame);
+    });
+  });
+</script>
