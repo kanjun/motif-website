@@ -53,7 +53,7 @@
 /* Phones: one note at a time, as ordinary pages. */
 @media (max-width: 800px) {
   .garden-page { height: auto; display: block; overflow: visible; }
-  .stack { display: block; overflow: visible; }
+  .stack { display: block; overflow: visible; padding: 0; }
   .pane, .pane.home { position: static; width: auto; height: auto; }
   .pane.paper { border-radius: 0; box-shadow: none; }
   .pane-body, .pane.home .pane-body { padding: var(--space-8) var(--space-6) var(--space-12); overflow: visible; }
