@@ -1,7 +1,7 @@
 ---
 title: "Technological and social change are critical to each other"
 created: 2026-10-16T07:27:10Z
-updated: 2026-10-16T07:51:10Z
+updated: 2026-10-16T07:27:10Z
 kanjecture: 8
 ---
 

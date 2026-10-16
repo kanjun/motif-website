@@ -1,7 +1,7 @@
 ---
 title: "A mathematical model of agency and self-efficacy"
 created: 2026-10-16T07:15:06Z
-updated: 2026-10-16T07:51:10Z
+updated: 2026-10-16T07:15:06Z
 kanjecture: 11
 ---
 

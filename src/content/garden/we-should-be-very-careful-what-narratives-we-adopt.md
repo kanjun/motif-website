@@ -1,7 +1,7 @@
 ---
 title: "We should be very careful what narratives we adopt"
 created: 2026-10-16T07:27:10Z
-updated: 2026-10-16T07:51:10Z
+updated: 2026-10-16T07:27:10Z
 kanjecture: 7
 ---
 
