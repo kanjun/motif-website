@@ -7,16 +7,22 @@ interface Props {
 }
 
 const { page } = Astro.props;
-const { Content } = await render(page);
-const { title, pageTitle, description, ogImage, sidebarRow } = page.data;
+const { Content, headings } = await render(page);
+const { title, pageTitle, description, ogImage } = page.data;
+const sections = { talks: 'talks' } as const;
+// A page with several sections gets a contents list beside it.
+const toc = page.id === 'talks' ? [] : headings.filter((h) => h.depth <= 3).map((h) => ({ id: h.slug, label: h.text }));
 ---
 
 <BaseLayout
   title={pageTitle ?? `Kanjun Qiu ∙ ${title}`}
   description={description}
   ogImage={ogImage}
-  sidebarRow={sidebarRow}
+  section={sections[page.id as keyof typeof sections]}
+  toc={toc.length > 1 ? toc : []}
 >
-  <h1>{title}</h1>
-  <Content />
+  <h1 class="title">{title}</h1>
+  <div class="content">
+    <Content />
+  </div>
 </BaseLayout>

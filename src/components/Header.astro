@@ -1,0 +1,52 @@
+---
+// The bar along the top of every page: name and portrait, social links, and the sections.
+// `section` is the section this page belongs to; it gets the pink underline.
+interface Props {
+  section?: 'essays' | 'kanjectures' | 'talks' | 'library';
+}
+
+const { section } = Astro.props;
+
+// Icons are from Simple Icons (CC0); the podcast microphone is drawn here.
+const socials = [
+  { name: "Twitter", href: "https://www.twitter.com/kanjun", path: "M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z" },
+  { name: "Substack", href: "https://kanjun.substack.com", path: "M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z" },
+  { name: "Podcast", href: "https://imbue.com/podcast/", path: "M12 2a3.5 3.5 0 0 0-3.5 3.5v6a3.5 3.5 0 0 0 7 0v-6A3.5 3.5 0 0 0 12 2zm-6.5 9.5h2a4.5 4.5 0 0 0 9 0h2a6.5 6.5 0 0 1-5.5 6.42V21h3v2h-8v-2h3v-3.08A6.5 6.5 0 0 1 5.5 11.5z" },
+  { name: "LinkedIn", href: "https://www.linkedin.com/in/kanjun/", path: "M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" },
+  { name: "Bluesky", href: "https://bsky.app/profile/kanjun.bsky.social", path: "M5.202 2.857C7.954 4.922 10.913 9.11 12 11.358c1.087-2.247 4.046-6.436 6.798-8.501C20.783 1.366 24 .213 24 3.883c0 .732-.42 6.156-.667 7.037-.856 3.061-3.978 3.842-6.755 3.37 4.854.826 6.089 3.562 3.422 6.299-5.065 5.196-7.28-1.304-7.847-2.97-.104-.305-.152-.448-.153-.327 0-.121-.05.022-.153.327-.568 1.666-2.782 8.166-7.847 2.97-2.667-2.737-1.432-5.473 3.422-6.3-2.777.473-5.899-.308-6.755-3.369C.42 10.04 0 4.615 0 3.883c0-3.67 3.217-2.517 5.202-1.026" },
+];
+
+const sections = [
+  { id: 'essays', name: 'Essays', href: '/writing' },
+  { id: 'kanjectures', name: 'Kanjectures', href: '/garden' },
+  { id: 'talks', name: 'Talks', href: '/talks' },
+];
+const library = [
+  { name: 'Quotes', href: '/library#quotes' },
+  { name: 'Sketches', href: '/library#sketches' },
+];
+---
+
+<header class="top">
+  <div class="who-wrap">
+    <a class="who" href="/"><img src="/images/kanjun.png" alt="" />Kanjun Qiu</a>
+    <span class="socials">
+      {socials.map((s) => (
+        <a class="soc" href={s.href} data-label={s.name} aria-label={s.name}>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d={s.path} /></svg>
+        </a>
+      ))}
+    </span>
+  </div>
+  <nav class="sections">
+    {sections.map((s) => (
+      <a class="label" href={s.href} aria-current={section === s.id ? 'page' : undefined}>{s.name}</a>
+    ))}
+    <span class="has-menu">
+      <a class="label" href="/library" aria-current={section === 'library' ? 'page' : undefined}>Library</a>
+      <div class="menu">
+        {library.map((l) => <a href={l.href}>{l.name}</a>)}
+      </div>
+    </span>
+  </nav>
+</header>

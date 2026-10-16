@@ -1,7 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import SubTitle from '../../components/SubTitle.astro';
 import { formatDate } from '../../lib/dates';
 
 // Newest first. Essays with a `url` link out; the rest live at /writing/<name>.
@@ -11,19 +10,16 @@ const essays = (await getCollection('essays')).sort((a, b) => b.data.date.getTim
 <BaseLayout
   title="Essays ∙ Kanjun Qiu"
   description="A Vision of Metascience, Research as Understanding, and more."
-  sidebarRow={2}
+  section="essays"
 >
-  <h1>Essays</h1>
-
-  <div class="essay-list">
+  <h1 class="title">Essays</h1>
+  <div class="rows essays">
     {essays.map((essay) => (
-      <article class="essay-entry">
-        <h2>
-          <a href={essay.data.url ?? `/writing/${essay.id}`}>{essay.data.title}</a>
-        </h2>
-        <SubTitle date={formatDate(essay.data.date)} authorName={essay.data.coauthor} authorUrl={essay.data.coauthorUrl} />
-        {essay.data.excerpt && <p>{essay.data.excerpt}</p>}
-      </article>
+      <a href={essay.data.url ?? `/writing/${essay.id}`}>
+        <span class="label">{formatDate(essay.data.date)}{essay.data.coauthor && ` · with ${essay.data.coauthor}`}</span>
+        <b>{essay.data.title}</b>
+        {essay.data.excerpt && <span class="sub">{essay.data.excerpt}</span>}
+      </a>
     ))}
   </div>
 </BaseLayout>

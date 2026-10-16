@@ -17,13 +17,13 @@ const { frontmatter } = Astro.props;
   title={`${frontmatter.title} ∙ Kanjun Qiu`}
   description={frontmatter.description}
   ogImage={frontmatter.ogImage}
-  sidebarRow={2}
+  section="essays"
 >
   <article>
-    <h1>{frontmatter.title}</h1>
-    {frontmatter.date && (
-      <p class="text-zinc-500 !mt-0">{frontmatter.date}</p>
-    )}
-    <slot />
+    {frontmatter.date && <span class="label" style="display:block;margin-bottom:var(--space-4)">{frontmatter.date}</span>}
+    <h1 class="title">{frontmatter.title}</h1>
+    <div class="content">
+      <slot />
+    </div>
   </article>
 </BaseLayout>

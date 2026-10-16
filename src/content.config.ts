@@ -11,8 +11,11 @@ const pages = defineCollection({
     pageTitle: z.string().optional(),
     description: z.string().optional(),
     ogImage: z.string().optional(),
-    // Which sidebar item to highlight.
+    // Which sidebar item to highlight (from the old design; unused now).
     sidebarRow: z.number().default(1),
+    // The About page opens with a small greeting above a large headline.
+    greeting: z.string().optional(),
+    headline: z.string().optional(),
   }),
 });
 

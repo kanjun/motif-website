@@ -1,0 +1,157 @@
+/* kanjun.me, in Kanjun's design system (D12 v11 · Draft 12).
+   Colour never goes on directly: everything reads the four slots below.
+   Free stand-ins for the licensed faces: Hanken Grotesk for ABC Diatype,
+   DM Mono for Diatype Semi-Mono, Source Serif 4 for Caslon Ionic. */
+
+:root {
+  --color-background: #e9ecd9; /* page */
+  --color-primary: #2d0060;    /* text */
+  --color-secondary: #d1b0b3;  /* surfaces, the current-page underline */
+  --color-accent: #1a1119;     /* links */
+  --web-white: #faf8f2;        /* paper: the lightest surface; never pure white */
+
+  --text-body: var(--color-primary);
+  --text-heading: var(--color-primary);
+  --text-secondary: color-mix(in oklab, var(--color-primary) 62%, transparent);
+  --border-hairline: color-mix(in oklab, var(--color-primary) 18%, transparent);
+  --link: var(--color-accent);
+
+  --font-sans: "Hanken Grotesk", Arial, system-ui, sans-serif;
+  --font-label: "DM Mono", "Courier New", monospace;
+  --font-serif: "Source Serif 4", Georgia, serif;
+
+  --space-1: .25rem; --space-2: .5rem; --space-3: .75rem; --space-4: 1rem; --space-6: 1.5rem;
+  --space-8: 2rem; --space-12: 3rem; --space-16: 4rem; --space-24: 6rem;
+  --measure: 34rem;
+  --radius-sm: .25rem; --radius-md: .375rem;
+  --leading: 1.625;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--color-background);
+  color: var(--text-body);
+  font: 400 1rem/var(--leading) var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: .15em; }
+a:hover { color: var(--text-heading); }
+p { margin: 0 0 1em; }
+
+/* Three type sizes: titles, body, and small labels (dates, names, the menu). */
+.title { font-size: 2rem; line-height: 1.15; font-weight: 500; margin: 0 0 var(--space-6); text-wrap: balance; color: var(--text-heading); }
+.label { font-family: var(--font-label); font-size: .75rem; line-height: 1.4; text-transform: uppercase; letter-spacing: .12em; color: var(--text-secondary); }
+.section-title { font-size: 1.5rem; line-height: 1.25; font-weight: 500; margin: var(--space-12) 0 var(--space-4); color: var(--text-heading); text-wrap: balance; scroll-margin-top: var(--space-8); }
+
+/* ---- the top bar ------------------------------------------------------- */
+.top { display: flex; align-items: center; justify-content: space-between; gap: var(--space-8); padding: var(--space-6) var(--space-8) var(--space-2); }
+.who-wrap { display: flex; align-items: center; gap: var(--space-6); }
+.who { display: flex; align-items: center; gap: var(--space-3); text-decoration: none; color: var(--text-heading); text-transform: uppercase; font-weight: 700; letter-spacing: .16em; font-size: 1.3rem; }
+.who:hover { color: var(--text-heading); }
+.who img { width: 2.5rem; height: 2.5rem; border-radius: 50%; object-fit: cover; }
+.socials { display: flex; gap: var(--space-3); align-items: center; }
+.soc { position: relative; display: block; width: .85rem; height: .85rem; color: var(--text-secondary); opacity: .55; }
+.soc svg { width: 100%; height: 100%; fill: currentColor; display: block; }
+.soc:hover, .soc:focus-visible { opacity: 1; color: var(--text-heading); }
+/* Icons alone are easy to misread, so each shows its name on hover. */
+.soc::after { content: attr(data-label); position: absolute; left: 50%; top: 1.45rem; transform: translateX(-50%); white-space: nowrap;
+  font-family: var(--font-label); font-size: .65rem; letter-spacing: .12em; text-transform: uppercase; color: var(--text-secondary);
+  opacity: 0; pointer-events: none; transition: opacity .15s; }
+.soc:hover::after, .soc:focus-visible::after { opacity: 1; }
+
+.sections { display: flex; gap: var(--space-8); align-items: center; }
+.sections a { text-decoration: none; padding-bottom: .3rem; }
+.sections a:hover { color: var(--text-heading); }
+.sections a[aria-current] { color: var(--text-heading); box-shadow: inset 0 -2px 0 var(--color-secondary); }
+.has-menu { position: relative; display: inline-flex; }
+.menu { display: none; position: absolute; right: -1rem; top: 2rem; z-index: 20; min-width: 11rem;
+  background: var(--color-background); border: 1px solid var(--border-hairline); border-radius: var(--radius-md); padding: var(--space-2) var(--space-4); }
+.has-menu:hover .menu, .has-menu:focus-within .menu { display: block; }
+/* A bridge so the pointer can travel from the word to the menu without it closing. */
+.has-menu::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 1rem; }
+.menu a { display: block; padding: .35rem 0; color: var(--text-body); font-size: .95rem; }
+.menu a:hover { text-decoration: underline; text-decoration-color: var(--color-secondary); text-decoration-thickness: 2px; text-underline-offset: .3em; }
+
+/* ---- an ordinary page: one column, and a contents list beside it ------- */
+.page { display: flex; gap: var(--space-16); padding: var(--space-12) var(--space-8) var(--space-24) calc(var(--space-8) + 2.75rem); }
+.page-main { flex: 0 1 36rem; min-width: 0; }
+.page-main.wide { flex-basis: 60rem; }
+.toc { position: sticky; top: var(--space-12); align-self: flex-start; width: 12rem; flex: none; }
+.toc-title { display: block; font-weight: 500; margin-bottom: var(--space-2); }
+.toc a { display: flex; justify-content: space-between; padding: .3rem 0; color: var(--text-secondary); text-decoration: none; }
+.toc a.sub { padding-left: var(--space-4); }
+.toc a:hover { color: var(--text-heading); }
+.toc a.on { color: var(--text-heading); }
+.toc a.on b { box-shadow: inset 0 -2px 0 var(--color-secondary); }
+.toc b { font-weight: 400; }
+
+/* ---- written content (markdown) ---------------------------------------- */
+.content { max-width: var(--measure); }
+.content p, .content li { line-height: var(--leading); }
+.content h2, .content h3 { font-size: 1.5rem; line-height: 1.25; font-weight: 500; margin: var(--space-12) 0 var(--space-4); scroll-margin-top: var(--space-8); }
+.content h2 a, .content h3 a { color: inherit; }
+.content h4 { font-size: 1rem; font-weight: 600; margin: var(--space-8) 0 var(--space-2); }
+.content ul { list-style: none; padding: 0; margin: 0 0 1em; }
+.content ul li { position: relative; padding: 0 0 var(--space-3) var(--space-6); }
+.content ul li::before { content: ""; position: absolute; left: 0; top: .8em; width: .5rem; height: 1px; background: var(--color-primary); }
+.content ol { padding-left: var(--space-6); }
+.content blockquote { margin: var(--space-6) 0; padding: 0 0 0 var(--space-4); border-left: 3px solid var(--color-secondary); }
+.content img { border-radius: var(--radius-md); margin: var(--space-6) 0; }
+.content iframe { max-width: 100%; border: 0; border-radius: var(--radius-md); margin: var(--space-2) 0 var(--space-6); }
+.content hr { border: 0; border-top: 1px solid var(--border-hairline); margin: var(--space-8) 0; }
+.content code { font-family: var(--font-label); font-size: .9em; }
+.content pre { background: var(--web-white); padding: var(--space-4); border-radius: var(--radius-md); overflow-x: auto; }
+.content table { border-collapse: collapse; }
+.content td, .content th { border-top: 1px solid var(--border-hairline); padding: var(--space-2) var(--space-3) var(--space-2) 0; text-align: left; }
+.lede-hi { margin: 0 0 var(--space-3); }
+
+/* A pull quote, in the serif voice. */
+.content .pull, .pull { font-family: var(--font-serif); font-style: italic; font-size: 2rem; line-height: 1.2; margin: var(--space-12) 0; text-wrap: balance; }
+
+/* Footnotes become sidenotes on wide screens (tufte-sidenotes.css). */
+.sidenote, .marginnote { font-size: .875rem; line-height: 1.5; color: var(--text-secondary); }
+
+/* ---- lists of things --------------------------------------------------- */
+.rows > * { display: block; padding: var(--space-4) 0; text-decoration: none; color: var(--text-body); border-top: 1px solid var(--border-hairline); }
+.rows > *:first-child { border-top: 0; }
+.rows b { display: block; font-weight: 500; color: var(--text-heading); }
+.rows .sub { display: block; color: var(--text-secondary); }
+.rows.dated a { display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-4); }
+.rows.dated .label { white-space: nowrap; }
+.essays > * { padding: var(--space-6) 0; }
+.essays b { font-size: 1.5rem; line-height: 1.25; margin: var(--space-1) 0 var(--space-3); text-wrap: balance; }
+.essays .sub { color: var(--text-body); }
+.essays a:hover b { text-decoration: underline; text-decoration-color: var(--color-secondary); text-decoration-thickness: 2px; text-underline-offset: .2em; }
+
+/* Quote cards: off-white sheets that flow into columns. */
+.cards { columns: 3 14rem; column-gap: var(--space-4); }
+.card { break-inside: avoid; background: var(--web-white); border-radius: var(--radius-md); padding: 1.25rem; margin: 0 0 var(--space-4); }
+.card .quote { font-family: var(--font-serif); font-size: .95rem; line-height: 1.55; margin: 0 0 var(--space-2); }
+.card .quote strong { font-weight: 600; }
+.subsection { font-size: 1.25rem; font-weight: 500; margin: var(--space-12) 0 var(--space-4); scroll-margin-top: var(--space-8); }
+.sketches { display: grid; grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr)); gap: var(--space-4); }
+.sketches a { color: var(--text-body); text-decoration: none; }
+.sketches img { aspect-ratio: 4 / 3; object-fit: cover; width: 100%; border-radius: var(--radius-md); margin-bottom: var(--space-2); background: var(--web-white); }
+
+/* ---- phones ------------------------------------------------------------ */
+@media (max-width: 800px) {
+  .top { flex-direction: column; align-items: flex-start; gap: var(--space-4); padding: var(--space-6) var(--space-6) 0; }
+  .who { font-size: 1.05rem; }
+  .sections { gap: var(--space-6); flex-wrap: wrap; }
+  .menu { left: -1rem; right: auto; }
+  .page { display: block; padding: var(--space-8) var(--space-6) var(--space-16); }
+  .toc { display: none; }
+  .title { font-size: 1.75rem; }
+}
+
+/* Sidenote colours from the theme, not the old purple. */
+.sidenote-number, .sidenote-num { color: var(--text-heading) !important; }
+@media (max-width: 1024px) {
+  .margin-toggle:checked + .sidenote, .margin-toggle:checked + .marginnote { background-color: var(--web-white) !important; border-left-color: var(--color-secondary) !important; }
+}
+
+/* Links are underlined (the old base styles removed the underline). */
+.content a, .rows .sub a, .card a { color: var(--link); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .15em; }

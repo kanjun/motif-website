@@ -1,9 +1,18 @@
 ---
-import { getEntry } from 'astro:content';
-import MarkdownPage from '../components/MarkdownPage.astro';
+import { getEntry, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
 
 const page = await getEntry('pages', 'about');
 if (!page) throw new Error('Missing src/content/pages/about.md');
+const { Content, headings } = await render(page);
+const { pageTitle, title, description, ogImage, greeting, headline } = page.data;
+const toc = headings.filter((h) => h.depth <= 3).map((h) => ({ id: h.slug, label: h.text }));
 ---
 
-<MarkdownPage page={page} />
+<BaseLayout title={pageTitle ?? title} description={description} ogImage={ogImage} toc={toc}>
+  {greeting && <p class="lede-hi">{greeting}</p>}
+  <h1 class="title">{headline ?? title}</h1>
+  <div class="content">
+    <Content />
+  </div>
+</BaseLayout>

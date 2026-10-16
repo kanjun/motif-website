@@ -1,20 +1,33 @@
 ---
-import Sidebar from '../components/Sidebar.astro';
-import '../styles/main.css';
+import Header from '../components/Header.astro';
+import '../styles/site.css';
 import '../styles/tufte-sidenotes.css';
+
+export interface TocItem {
+  id: string;
+  label: string;
+  count?: number;
+  sub?: boolean;
+}
 
 interface Props {
   title: string;
   description?: string;
   ogImage?: string;
-  sidebarRow?: number;
+  // Which section of the top bar to underline.
+  section?: 'essays' | 'kanjectures' | 'talks' | 'library';
+  // An "On this page" list beside the page, one entry per section heading.
+  toc?: TocItem[];
+  wide?: boolean;
 }
 
 const {
   title,
   description = "Kanjun Qiu - Writing, Kanjectures, Notes, Bookshelf.",
   ogImage = "/images/favicon.png",
-  sidebarRow = 1
+  section,
+  toc = [],
+  wide = false,
 } = Astro.props;
 
 // Link previews need a full address, so expand site-relative image paths.
@@ -28,46 +41,54 @@ const ogImageUrl = new URL(ogImage, Astro.site).href;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
-
-    <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImageUrl} />
     <meta name="twitter:card" content="summary" />
-
-    <!-- Favicon -->
     <link rel="shortcut icon" href="/images/favicon.png" />
-
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet" />
-
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300..800;1,300..800&family=DM+Mono:wght@400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..600;1,8..60,400..600&display=swap" rel="stylesheet" />
     <!-- Littlefoot for mobile footnote hover -->
     <link rel="stylesheet" href="https://unpkg.com/littlefoot/dist/littlefoot.css" />
   </head>
-  <body class="bg-white text-black antialiased">
-    <div class="w-full m-auto">
-      <div class="sm:grid sm:grid-cols-5 gap-4">
-        <Sidebar activeRow={sidebarRow} />
-        <main class="col-span-3 max-w-screen-md px-4 sm:px-8 pb-32 justify-start p-8 mx-auto prose prose-zinc w-full">
-          <slot />
-        </main>
-      </div>
+  <body>
+    <Header section={section} />
+    <div class="page">
+      <main class:list={['page-main', { wide }]}>
+        <slot />
+      </main>
+      {toc.length > 0 && (
+        <aside class="toc">
+          <span class="toc-title">On this page</span>
+          {toc.map((item, i) => (
+            <a href={`#${item.id}`} class:list={[{ sub: item.sub, on: i === 0 }]} data-toc={item.id}>
+              <b>{item.label}</b>{item.count !== undefined && <span>{item.count}</span>}
+            </a>
+          ))}
+        </aside>
+      )}
     </div>
 
-    <!-- Littlefoot initialization for mobile footnote popups -->
+    <script>
+      // The contents list underlines the section you are reading.
+      const links = [...document.querySelectorAll<HTMLAnchorElement>('.toc a[data-toc]')];
+      if (links.length) {
+        const targets = links.map((a) => document.getElementById(a.dataset.toc!)).filter(Boolean) as HTMLElement[];
+        const update = () => {
+          let current = targets[0];
+          for (const t of targets) if (t.getBoundingClientRect().top < window.innerHeight * 0.3) current = t;
+          links.forEach((a) => a.classList.toggle('on', a.dataset.toc === current?.id));
+        };
+        window.addEventListener('scroll', update, { passive: true });
+        update();
+      }
+    </script>
     <script>
       import littlefoot from 'littlefoot';
-
       // Only activate littlefoot on mobile (sidenotes become footnotes)
       if (window.innerWidth < 768) {
-        littlefoot({
-          activateOnHover: true,
-          hoverDelay: 100,
-        });
+        littlefoot({ activateOnHover: true, hoverDelay: 100 });
       }
     </script>
   </body>
