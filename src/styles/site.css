@@ -187,3 +187,8 @@ a.zoom { cursor: zoom-in; display: block; }
 /* Each talk's date, title and video line up with its neighbour's, whatever the title's length. */
 .talk { display: grid; grid-row: span 3; grid-template-rows: subgrid; row-gap: 0; align-content: start; }
 .talk .talk-title { align-self: start; }
+
+/* On wide screens the whole site sits in a centred band, so the bar and the page
+   share one left edge instead of hugging the left side of the window. */
+:root { --site-w: 80rem; --site-gutter: max(0px, (100vw - var(--site-w)) / 2); }
+.top, .page { width: 100%; max-width: var(--site-w); margin-left: auto; margin-right: auto; }
