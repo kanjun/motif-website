@@ -1,0 +1,40 @@
+---
+import { getEntry } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { inline } from '../lib/library';
+
+// Built from talks.md: each talk is "## [YEAR | Title](link)" followed by its embed.
+const page = await getEntry('pages', 'talks');
+const body = page?.body ?? '';
+const [introPart, ...parts] = body.split(/^##\s+/m);
+const talks = parts.map((part) => {
+  const [heading, ...rest] = part.split('\n');
+  const m = heading.match(/^\[(.+?)\]\(([^)]+)\)/);
+  const text = m ? m[1] : heading;
+  const [year, ...titleBits] = text.split('|');
+  const embed = rest.join('\n').trim();
+  return {
+    year: titleBits.length ? year.trim() : '',
+    title: (titleBits.length ? titleBits.join('|') : text).trim(),
+    url: m?.[2],
+    embed: embed.replace(/\swidth="\d+"/, ' width="100%"'),
+    audio: /spotify|soundcloud|podcast/.test(embed),
+  };
+});
+---
+
+<BaseLayout title={page?.data.pageTitle ?? 'Talks ∙ Kanjun Qiu'} description={page?.data.description} section="talks" wide>
+  <h1 class="title">Talks</h1>
+  <div class="content">
+    {introPart.trim().split(/\n\s*\n/).map((p) => <p set:html={inline(p)} />)}
+  </div>
+  <div class="talks">
+    {talks.map((t) => (
+      <div class:list={['talk', { audio: t.audio }]}>
+        <div class="embed" set:html={t.embed} />
+        <span class="label">{t.year}</span>
+        {t.url ? <a class="talk-title" href={t.url}>{t.title}</a> : <span class="talk-title">{t.title}</span>}
+      </div>
+    ))}
+  </div>
+</BaseLayout>

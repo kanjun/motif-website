@@ -157,3 +157,11 @@ p { margin: 0 0 1em; }
 
 /* Links are underlined (the old base styles removed the underline). */
 .content a, .rows .sub a, .card a { color: var(--link); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .15em; }
+
+/* Talks: videos in two columns, each with its year and title. */
+.talks { display: grid; grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr)); gap: var(--space-8) var(--space-6); margin-top: var(--space-8); }
+.talk .embed iframe { width: 100%; aspect-ratio: 16 / 9; height: auto; border: 0; border-radius: var(--radius-md); display: block; margin-bottom: var(--space-3); background: var(--web-white); }
+.talk.audio .embed iframe { aspect-ratio: auto; height: 152px; }
+.talk .label { display: block; margin-bottom: var(--space-1); }
+.talk-title { display: block; font-weight: 500; color: var(--text-heading); text-decoration: none; line-height: 1.4; }
+a.talk-title:hover { text-decoration: underline; text-decoration-color: var(--color-secondary); text-decoration-thickness: 2px; text-underline-offset: .2em; }
