@@ -15,15 +15,15 @@ If you don't have my email, the best way to reach me is via [Twitter DM](https:/
 
 Everything I do centers around human agency and potential, and the ideas, institutions, and technologies to enable that.
 
-- My main focus is [Imbue](https://imbue.com). We aim to rekindle the dream of the *personal* computer by developing a better way to create and edit software — with AI agents that work with us to translate our ideas into code and bring them to life. If you find this interesting, [we're hiring](https://imbue.com/careers)!
+- My main focus is [Imbue](https://imbue.com). We aim to rekindle the dream of the *personal* computer via [Imbue Studio](https://imbue.com/product/studio) and fight power concentration in the age of AI. If you find this interesting, [we're hiring](https://imbue.com/careers)!
 - With [Ali Rohde](https://alirohde.com/) and [Josh Albrecht](https://joshalbrecht.com/) at [Outset Capital](https://outsetcapital.com/), I invest in early-stage startup founders. Our mission is to support kind and capable founders in doing their life's work. If you are (or plan to be) one, feel free to drop me a line!
-- With [Michael Nielsen](https://michaelnielsen.org/), I [investigated](https://scienceplusplus.org/) the processes, progress, and science of science.
 - With [Jason Benn](https://jasonbenn.com/) and our housemates from [The Archive](https://archive.house/), I'm building a [Neighborhood](https://neighborhoodsf.com/) in San Francisco—a university campus for modern adult living with lively intellectual culture and best friends you can grow old with.
 - With my cofounder [Josh Albrecht](https://joshalbrecht.com/), I host [podcast conversations](https://generallyintelligent.com/podcast/) with deep learning researchers about the behind-the-scenes ideas, opinions, and intuitions that they wouldn't normally discuss in a typical paper or talk.
 
 ### Past work
 
 - I co-founded and was CEO of [Sourceress](https://techcrunch.com/2017/11/07/sourceress-raises-3-5m-to-find-candidates-that-managers-want-without-realizing-it/), an AI recruiting company that went through YC and raised $13M.
+- With [Michael Nielsen](https://michaelnielsen.org/), I [investigated](https://scienceplusplus.org/) the processes, progress, and science of science. Our flagship essay was cited in the White House report [Science: A New Golden Age](https://www.whitehouse.gov/science/). (Indeed, much of that report seems to align with the thesis we put out: that the shape of our institutions determine the shape of the science produced.)
 - I co-founded and lived at [The Archive](https://archive.house/), which you can learn about on the [Today Show](https://www.today.com/video/meet-the-tech-ceo-who-chooses-to-live-with-15-roommates-1342712387551). We created an unusually enabling culture for agency and connectedness; I suspect this encouraged us to do things we wouldn't otherwise have done — housemates founded Anthropic, Bluesky, Imbue, ran for SF office, etc.
 - I grew [Dropbox](https://dropbox.com/) from 300 to 1500 people as Chief of Staff after college, and was fortunate to get the equivalent of a business school education along the way.
 - I co-authored [Sew Electric, a book](http://sewelectric.org/) that teaches kids programming using sewable electronics, and [tinkered with hardware](http://highlowtech.org/) at the MIT Media Lab.
