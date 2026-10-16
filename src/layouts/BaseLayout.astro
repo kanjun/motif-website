@@ -60,7 +60,6 @@ const ogImageUrl = new URL(ogImage, Astro.site).href;
       </main>
       {toc.length > 0 && (
         <aside class="toc">
-          <span class="toc-title">On this page</span>
           {toc.map((item, i) => (
             <a href={`#${item.id}`} class:list={[{ sub: item.sub, on: i === 0 }]} data-toc={item.id}>
               <b>{item.label}</b>{item.count !== undefined && <span>{item.count}</span>}

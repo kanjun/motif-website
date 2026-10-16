@@ -2,7 +2,7 @@
 // (the stack is kept in the address as ?stack=a&stack=b), fold covered notes
 // into spines, and preview a note when hovering over a link to it.
 
-const SPINE = 40;
+const SPINE = 44; // matches --spine-w (2.75rem) in garden.css
 const isWide = () => window.matchMedia('(min-width: 801px)').matches;
 const pageCache = new Map<string, Promise<HTMLElement | null>>();
 
@@ -63,10 +63,11 @@ function writeUrl(stack: HTMLElement, push: boolean) {
 // Scroll so a pane is fully in view: a newly opened pane lands at the right
 // edge; a folded one unfolds by sliding the panes after it out of its way.
 function scrollToPane(stack: HTMLElement, pane: HTMLElement) {
+  // Columns can differ in width (the front page is wider), so use where this one really sits.
   const i = panes(stack).indexOf(pane);
-  const paneW = pane.offsetWidth;
-  const showRightEdge = (i + 1) * paneW - stack.clientWidth;
-  const uncover = i * (paneW - SPINE);
+  const start = pane.offsetLeft - stack.offsetLeft;
+  const showRightEdge = start + pane.offsetWidth - stack.clientWidth;
+  const uncover = start - i * SPINE - parseFloat(getComputedStyle(stack).paddingLeft);
   const left = Math.max(0, Math.min(Math.max(stack.scrollLeft, showRightEdge), uncover));
   stack.scrollTo({ left, behavior: 'smooth' });
 }
