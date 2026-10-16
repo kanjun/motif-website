@@ -3,7 +3,7 @@
 // starts a group, like Friendquotes) and notes.md (each sketch is a
 // "### Title", optional words, then its image).
 
-export interface Quote { html: string; by: string }
+export interface Quote { html: string; by: string; raw: string }
 export interface QuoteGroup { title: string; id: string; quotes: Quote[] }
 export interface Sketch { title: string; html: string; image: string; alt: string }
 
@@ -33,7 +33,7 @@ export function parseQuotes(body: string): QuoteGroup[] {
     // Friend quotes carry their name on the same line: "quote <br /><span>— [Name](url), context</span>"
     const credit = text.match(/<br\s*\/?>\s*<span[^>]*>\s*—\s*([\s\S]*?)<\/span>\s*$/);
     if (credit) { who = credit[1].replace(/\[([^\]]+)\]\([^)]*\)/g, '$1').trim(); text = text.slice(0, credit.index).trim(); }
-    groups.at(-1)!.quotes.push({ html: inline(text), by: who });
+    groups.at(-1)!.quotes.push({ html: inline(text), by: who, raw: text });
   }
   return groups.filter((g) => g.quotes.length);
 }

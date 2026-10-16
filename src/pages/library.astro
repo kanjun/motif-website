@@ -36,7 +36,7 @@ const toc = [
       {i === 0 ? <h2 class="section-title" id={g.id}>{g.title}</h2> : <h3 class="subsection" id={g.id}>{g.title}</h3>}
       <div class="cards">
         {g.quotes.map((q) => (
-          <div class="card">
+          <div class="card" {...(import.meta.env.DEV ? { "data-edit-file": "pages/quotes", "data-edit-find": q.raw.slice(0, 40) } : {})}>
             <p class="quote" set:html={q.html} />
             <span class="label">{q.by}</span>
           </div>
@@ -53,7 +53,7 @@ const toc = [
       </div>
       <div class="sketches">
         {sketches.map((s) => (
-          <div class="sketch">
+          <div class="sketch" {...(import.meta.env.DEV ? { "data-edit-file": "pages/notes", "data-edit-find": s.title } : {})}>
             <a href={s.image} class="zoom" data-title={s.title}><img src={s.thumb} alt={s.alt} width="640" height="480" /></a>
             <b>{s.title}</b>
             {s.html && <span class="sub" set:html={s.html} />}

@@ -17,3 +17,7 @@ Thumbs.db
 .env
 .env.*
 
+
+# Written by the Website editor for its preview (never published)
+.astro-editor.config.mjs
+.editor-inplace.js

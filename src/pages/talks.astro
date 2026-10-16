@@ -33,7 +33,7 @@ const talks = parts.map((part) => {
   </div>
   <div class="talks">
     {talks.map((t) => (
-      <div class:list={['talk', { audio: t.audio }]}>
+      <div class:list={['talk', { audio: t.audio }]} {...(import.meta.env.DEV ? { 'data-edit-file': 'pages/talks', 'data-edit-find': t.title } : {})}>
         <span class="label">{t.year}</span>
         {t.url ? <a class="talk-title" href={t.url}>{t.title}</a> : <span class="talk-title">{t.title}</span>}
         {/* A still with a play button; the player loads only when clicked. Pages

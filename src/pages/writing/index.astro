@@ -17,7 +17,7 @@ const essays = (await getCollection('essays')).sort((a, b) => b.data.date.getTim
   <div class="rows essays">
     {essays.map((essay) => (
       <div class="essay">
-        <a href={essay.data.url ?? `/writing/${essay.id}`}>
+        <a href={essay.data.url ?? `/writing/${essay.id}`} {...(import.meta.env.DEV && essay.data.url ? { 'data-edit-file': `essays/${essay.id}`, 'data-edit-find': essay.data.title } : {})}>
           <span class="label">{formatDate(essay.data.date)}{essay.data.coauthor && ` · with ${essay.data.coauthor}`}</span>
           <b>{essay.data.title}</b>
           {essay.data.excerpt && <span class="sub">{essay.data.excerpt}</span>}
